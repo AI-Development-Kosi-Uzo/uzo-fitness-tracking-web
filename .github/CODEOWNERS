@@ -1,0 +1,18 @@
+# Code owners for contracts and core surfaces
+# Replace owners with your desired user/team handles if needed.
+
+# Contracts docs (repo has React-Migration at root)
+React-Migration/01-* @AI-Development-Kosi-Uzo
+React-Migration/02-* @AI-Development-Kosi-Uzo
+React-Migration/04-* @AI-Development-Kosi-Uzo
+React-Migration/05-* @AI-Development-Kosi-Uzo
+React-Migration/06-* @AI-Development-Kosi-Uzo
+
+# Core app contracts
+app/src/data/types.ts @AI-Development-Kosi-Uzo
+app/src/data/db.ts @AI-Development-Kosi-Uzo
+app/src/data/queryKeys.ts @AI-Development-Kosi-Uzo
+app/src/data/repositories/contracts.ts @AI-Development-Kosi-Uzo
+app/src/routes/paths.ts @AI-Development-Kosi-Uzo
+
+
