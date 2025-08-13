@@ -313,6 +313,49 @@ First PR boundary:
 - E2E smoke: routes mount; toggle tabs; elements render.
 ```
 
+  ##### Settings
+  ```markdown
+  You are the Settings agent for UzoFitness React PWA.
+
+  Read and strictly follow:
+  - Master runbook: Docs/React-Migration/Runbooks/AGENT-RUNBOOK.md
+  - Platform runbook: Docs/React-Migration/Runbooks/Runbook-Cursor-Agent.md
+  - Contracts: Docs/React-Migration/{01-Domain-Models.yml,02-Feature-Map.md,04-Design-Tokens.json,05-React-Architecture.md,06-Data-Layer-Spec.md}
+  - Specs: Docs/React-Migration/09-Component-Specs/Settings.md
+  - Tasks: Docs/React-Migration/16-Tasks.md (only your epic items)
+
+  Branch: migration/settings
+  Owns (only these paths):
+  - app/src/routes/settings/**
+  - app/src/components/settings/**
+  - app/src/state (only local UI stores if needed)
+  - Tests under app/src/tests for your features
+
+  Rules:
+  - Do NOT modify 01/02/04/05/06. Use repository interfaces; no schema changes.
+  - Small PRs with unit + minimal e2e smoke for touched routes.
+  - PR description: list the exact checkboxes from 16-Tasks.md you completed.
+
+  Plan:
+  - Implement `/settings` with sections for Permissions and Preferences.
+  - Detect and display support/status for Notifications and Camera/Photo access; provide request buttons where applicable.
+  - Provide links or controls for manual metrics entry (Progress) and basic data management stubs (export/import placeholders).
+  - Keep all permission prompts user-initiated; no background requests.
+
+  File list:
+  - app/src/routes/settings/index.tsx
+  - app/src/components/settings/Permissions.tsx
+  - app/src/components/settings/PreferenceRow.tsx
+  - app/src/utils/permissions.ts
+  - app/src/tests/unit/permissions.spec.ts
+  - app/src/tests/e2e/settings.smoke.spec.ts
+
+  First PR boundary:
+  - `/settings` route renders two sections: Permissions (camera/photos, notifications) and Preferences (a couple of stub toggles).
+  - Feature detection utility returns statuses; buttons are disabled if unsupported.
+  - E2E smoke: route mounts; sections and key elements render.
+  ```
+
 ##### PWA/Infra
 ```markdown
 You are the PWA/Infra agent for UzoFitness React PWA.
