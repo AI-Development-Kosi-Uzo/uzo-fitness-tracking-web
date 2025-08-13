@@ -132,6 +132,274 @@ Rules:
 Before coding, reply with: plan, file list, first PR boundary.
 ```
 
+##### Pre-filled feature thread kickoffs
+
+##### Logging
+```markdown
+You are the Logging agent for UzoFitness React PWA.
+
+Read and strictly follow:
+- Master runbook: Docs/React-Migration/Runbooks/AGENT-RUNBOOK.md
+- Platform runbook: Docs/React-Migration/Runbooks/Runbook-Cursor-Agent.md
+- Contracts: Docs/React-Migration/{01-Domain-Models.yml,02-Feature-Map.md,04-Design-Tokens.json,05-React-Architecture.md,06-Data-Layer-Spec.md}
+- Specs: Docs/React-Migration/09-Component-Specs/Logging.md
+- Tasks: Docs/React-Migration/16-Tasks.md (only your epic items)
+
+Branch: migration/logging
+Owns (only these paths):
+- app/src/routes/log/**
+- app/src/components/log/**
+- app/src/state (only local UI stores if needed)
+- Tests under app/src/tests for your features
+
+Rules:
+- Do NOT modify 01/02/04/05/06. Use repository interfaces; no schema changes.
+- Small PRs with unit + minimal e2e smoke for touched routes.
+- PR description: list the exact checkboxes from 16-Tasks.md you completed.
+
+Plan:
+- Implement `/log` and `/log/session` pages with TanStack Router.
+- Wire repositories for active plan, today’s session, session exercises, and completed sets; keep local-first with Dexie.
+- Add Zustand timers store (workout/rest) with visibility pause.
+- Build components: ExerciseRow, SetRow, RestTimerButton, RestTimerPicker, SessionHeader.
+- Finish session pipeline: validate completion, create performed exercises, invalidate queries.
+
+File list:
+- app/src/routes/log/index.tsx
+- app/src/routes/log/session.tsx
+- app/src/components/log/ExerciseRow.tsx
+- app/src/components/log/SetRow.tsx
+- app/src/components/log/RestTimerButton.tsx
+- app/src/components/log/RestTimerPicker.tsx
+- app/src/components/log/SessionHeader.tsx
+- app/src/state/timers.store.ts
+- app/src/tests/unit/timers.store.spec.ts
+- app/src/tests/e2e/logging.smoke.spec.ts
+
+First PR boundary:
+- Route stubs for `/log` and `/log/session` rendering skeleton lists and a disabled “Start Session” button.
+- Add `timers.store.ts` with basic start/pause/tick and a unit test.
+- E2E smoke: page mounts, route navigates, key elements present.
+```
+
+##### Library
+```markdown
+You are the Library agent for UzoFitness React PWA.
+
+Read and strictly follow:
+- Master runbook: Docs/React-Migration/Runbooks/AGENT-RUNBOOK.md
+- Platform runbook: Docs/React-Migration/Runbooks/Runbook-Cursor-Agent.md
+- Contracts: Docs/React-Migration/{01-Domain-Models.yml,02-Feature-Map.md,04-Design-Tokens.json,05-React-Architecture.md,06-Data-Layer-Spec.md}
+- Specs: Docs/React-Migration/09-Component-Specs/Library.md
+- Tasks: Docs/React-Migration/16-Tasks.md (only your epic items)
+
+Branch: migration/library
+Owns (only these paths):
+- app/src/routes/library/**
+- app/src/components/library/**
+- app/src/state (only local UI stores if needed)
+- Tests under app/src/tests for your features
+
+Rules:
+- Do NOT modify 01/02/04/05/06. Use repository interfaces; no schema changes.
+- Small PRs with unit + minimal e2e smoke for touched routes.
+- PR description: list the exact checkboxes from 16-Tasks.md you completed.
+
+Plan:
+- Implement `/library`, `/library/templates/:templateId`, `/library/exercises`.
+- CRUD for templates/exercises; day/exercise template listing by ids; drag-to-reorder via `position`.
+- Build components: TemplateEditor, DayList, ExerciseTemplateRow, ExercisePicker.
+- Activate plan flow: activate from template with custom name and start date.
+
+File list:
+- app/src/routes/library/index.tsx
+- app/src/routes/library/template.$id.tsx
+- app/src/routes/library/exercises.tsx
+- app/src/components/library/TemplateEditor.tsx
+- app/src/components/library/DayList.tsx
+- app/src/components/library/ExerciseTemplateRow.tsx
+- app/src/components/library/ExercisePicker.tsx
+- app/src/tests/integration/library.forms.spec.ts
+- app/src/tests/e2e/library.smoke.spec.ts
+
+First PR boundary:
+- `/library` lists templates and exercises (read-only) with loading/empty states.
+- Basic “Create Template” and “Create Exercise” dialogs with validation.
+- E2E smoke: create, list refresh, route to template detail.
+```
+
+##### History
+```markdown
+You are the History agent for UzoFitness React PWA.
+
+Read and strictly follow:
+- Master runbook: Docs/React-Migration/Runbooks/AGENT-RUNBOOK.md
+- Platform runbook: Docs/React-Migration/Runbooks/Runbook-Cursor-Agent.md
+- Contracts: Docs/React-Migration/{01-Domain-Models.yml,02-Feature-Map.md,04-Design-Tokens.json,05-React-Architecture.md,06-Data-Layer-Spec.md}
+- Specs: Docs/React-Migration/09-Component-Specs/History.md
+- Tasks: Docs/React-Migration/16-Tasks.md (only your epic items)
+
+Branch: migration/history
+Owns (only these paths):
+- app/src/routes/history/**
+- app/src/components/history/**
+- Tests under app/src/tests for your features
+
+Rules:
+- Do NOT modify 01/02/04/05/06. Use repository interfaces; no schema changes.
+- Small PRs with unit + minimal e2e smoke for touched routes.
+- PR description: list the exact checkboxes from 16-Tasks.md you completed.
+
+Plan:
+- Implement `/history` with calendar grid and per-day session list.
+- Compute streaks and totals client-side; invalidate caches on session finish.
+- Components: Calendar, SessionList.
+
+File list:
+- app/src/routes/history/index.tsx
+- app/src/components/history/Calendar.tsx
+- app/src/components/history/SessionList.tsx
+- app/src/utils/streaks.ts
+- app/src/tests/unit/streaks.spec.ts
+- app/src/tests/e2e/history.smoke.spec.ts
+
+First PR boundary:
+- Calendar and list skeletons wired to `workoutSessions` with loading/empty states.
+- Streak utility with unit tests.
+- E2E smoke: route mounts; selecting a date filters sessions.
+```
+
+##### Progress
+```markdown
+You are the Progress agent for UzoFitness React PWA.
+
+Read and strictly follow:
+- Master runbook: Docs/React-Migration/Runbooks/AGENT-RUNBOOK.md
+- Platform runbook: Docs/React-Migration/Runbooks/Runbook-Cursor-Agent.md
+- Contracts: Docs/React-Migration/{01-Domain-Models.yml,02-Feature-Map.md,04-Design-Tokens.json,05-React-Architecture.md,06-Data-Layer-Spec.md}
+- Specs: Docs/React-Migration/09-Component-Specs/Progress.md
+- Tasks: Docs/React-Migration/16-Tasks.md (only your epic items)
+
+Branch: migration/progress
+Owns (only these paths):
+- app/src/routes/progress/**
+- app/src/components/progress/**
+- Tests under app/src/tests for your features
+
+Rules:
+- Do NOT modify 01/02/04/05/06. Use repository interfaces; no schema changes.
+- Small PRs with unit + minimal e2e smoke for touched routes.
+- PR description: list the exact checkboxes from 16-Tasks.md you completed.
+
+Plan:
+- Implement `/progress/stats` and `/progress/photos`.
+- Stats: aggregate performed exercises by week; charts via Recharts.
+- Photos: grid by angle; compare two photos; edit date/weight.
+- Components: Chart, PhotoGrid, CompareView, EditPhotoModal.
+
+File list:
+- app/src/routes/progress/stats.tsx
+- app/src/routes/progress/photos.tsx
+- app/src/components/progress/Chart.tsx
+- app/src/components/progress/PhotoGrid.tsx
+- app/src/components/progress/CompareView.tsx
+- app/src/components/progress/EditPhotoModal.tsx
+- app/src/tests/integration/progress.stats.spec.ts
+- app/src/tests/e2e/progress.smoke.spec.ts
+
+First PR boundary:
+- Stats route with placeholder chart fed by a simple selector; Photos route skeleton with grid placeholders.
+- Basic unit for trend aggregation selector.
+- E2E smoke: routes mount; toggle tabs; elements render.
+```
+
+##### PWA/Infra
+```markdown
+You are the PWA/Infra agent for UzoFitness React PWA.
+
+Read and strictly follow:
+- Master runbook: Docs/React-Migration/Runbooks/AGENT-RUNBOOK.md
+- Platform runbook: Docs/React-Migration/Runbooks/Runbook-Cursor-Agent.md
+- Contracts: Docs/React-Migration/{01-Domain-Models.yml,02-Feature-Map.md,04-Design-Tokens.json,05-React-Architecture.md,06-Data-Layer-Spec.md}
+- Specs: Docs/React-Migration/07-PWA-Spec.md
+- Tasks: Docs/React-Migration/16-Tasks.md (only your epic items)
+
+Branch: migration/pwa-infra
+Owns (only these paths):
+- app/public/** (manifest and icons)
+- app/src/sw/**
+- app/src/data/outbox.ts
+- workbox.config.ts
+- vite config and SW registration wiring
+- Tests under app/src/tests for your features
+
+Rules:
+- Do NOT modify 01/02/04/05/06. Use repository interfaces; no schema changes.
+- Small PRs with unit + minimal e2e smoke for touched routes.
+- PR description: list the exact checkboxes from 16-Tasks.md you completed.
+
+Plan:
+- Add `manifest.webmanifest` and icons; register Workbox SW.
+- Implement mutation outbox and Background Sync tag `uzofitness-sync`.
+- Configure precaching of app shell; runtime strategies for images/GETs.
+- Add install prompt strategy.
+
+File list:
+- app/public/manifest.webmanifest
+- app/src/sw/sw.ts
+- app/src/data/outbox.ts
+- workbox.config.ts
+- app/src/sw/registerSW.ts
+- app/src/tests/integration/offline.queue.spec.ts
+- app/src/tests/e2e/offline.smoke.spec.ts
+
+First PR boundary:
+- Manifest + SW registration + minimal Workbox config producing a built SW with app shell precache.
+- Outbox module skeleton with enqueue/dequeue and a unit test.
+- E2E smoke: service worker registered; offline navigates cached shell.
+```
+
+##### Testing/CI
+```markdown
+You are the Testing/CI agent for UzoFitness React PWA.
+
+Read and strictly follow:
+- Master runbook: Docs/React-Migration/Runbooks/AGENT-RUNBOOK.md
+- Platform runbook: Docs/React-Migration/Runbooks/Runbook-Cursor-Agent.md
+- Contracts: Docs/React-Migration/{01-Domain-Models.yml,02-Feature-Map.md,04-Design-Tokens.json,05-React-Architecture.md,06-Data-Layer-Spec.md}
+- Specs: Docs/React-Migration/13-Testing-Plan.md
+- Tasks: Docs/React-Migration/16-Tasks.md (only your epic items)
+
+Branch: migration/testing-ci
+Owns (only these paths):
+- vitest.config.ts, playwright.config.ts, app/src/setupTests.ts
+- app/src/tests/**
+- .github/workflows/**
+- Any lightweight test helpers and fixtures under app/src/tests
+
+Rules:
+- Do NOT modify 01/02/04/05/06. Use repository interfaces; no schema changes.
+- Small PRs with unit + minimal e2e smoke for touched routes.
+- PR description: list the exact checkboxes from 16-Tasks.md you completed.
+
+Plan:
+- Configure Vitest + Testing Library and Playwright; set up fake IndexedDB for repos.
+- Establish test IDs and helpers; baseline unit tests for utils and stores.
+- Add CI workflow: install, build, unit, e2e smoke.
+
+File list:
+- vitest.config.ts
+- playwright.config.ts
+- app/src/setupTests.ts
+- app/src/tests/unit/example.spec.ts
+- app/src/tests/e2e/core.smoke.spec.ts
+- .github/workflows/ci.yml
+
+First PR boundary:
+- Working Vitest and Playwright configs; one passing unit (utils) and one passing e2e smoke.
+- CI workflow running install/build/test on push/PR.
+```
+
 Feature thread kickoff (Logging/Library/History/Progress/PWA/Testing)
 ```markdown
 You are the <EPIC> agent for UzoFitness React PWA.
