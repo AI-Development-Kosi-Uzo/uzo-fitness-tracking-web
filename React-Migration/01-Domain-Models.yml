@@ -1,0 +1,162 @@
+version: 1
+source: SwiftData (UzoFitness)
+notes: |
+  Canonicalized entities for React + TypeScript. UUIDs become string IDs. Dates are ISO 8601 in UTC.
+
+entities:
+  Exercise:
+    fields:
+      id: string (uuid)
+      name: string (unique)
+      category: enum ExerciseCategory
+      instructions: string
+      mediaAssetId: string | null
+      lastUsedWeight: number | null
+      lastUsedReps: number | null
+      lastTotalVolume: number | null
+      lastUsedDate: string | null  # ISO date
+    relationships:
+      completedSets: CompletedSet[]
+      performedRecords: PerformedExercise[]
+    invariants:
+      - name non-empty and unique (case-insensitive)
+
+  WorkoutTemplate:
+    fields:
+      id: string (uuid)
+      name: string (unique)
+      summary: string
+      createdAt: string  # ISO date
+    relationships:
+      dayTemplates: DayTemplate[]
+      plans: WorkoutPlan[]
+
+  DayTemplate:
+    fields:
+      id: string (uuid)
+      weekday: enum Weekday
+      isRest: boolean
+      notes: string
+    relationships:
+      workoutTemplate: WorkoutTemplate
+      exerciseTemplates: ExerciseTemplate[]
+
+  ExerciseTemplate:
+    fields:
+      id: string (uuid)
+      exerciseId: string (uuid)
+      setCount: number
+      reps: number
+      weight: number | null
+      position: number  # ordering index (double in iOS, use number)
+      supersetId: string | null (uuid)
+      createdAt: string
+    relationships:
+      dayTemplate: DayTemplate
+    invariants:
+      - setCount >= 1
+      - reps >= 1
+
+  WorkoutPlan:
+    fields:
+      id: string (uuid)
+      customName: string
+      isActive: boolean
+      startedAt: string
+      durationWeeks: number (>= 1)
+      notes: string
+      endedAt: string | null
+    relationships:
+      template: WorkoutTemplate
+
+  WorkoutSession:
+    fields:
+      id: string (uuid)
+      date: string
+      title: string
+      duration: number | null  # seconds
+      createdAt: string
+      totalVolume: number (computed)
+    relationships:
+      plan: WorkoutPlan
+      sessionExercises: SessionExercise[]
+    computed:
+      - totalVolume = sum(sessionExercises[].totalVolume)
+
+  SessionExercise:
+    fields:
+      id: string (uuid)
+      exerciseId: string (uuid)
+      plannedSets: number
+      plannedReps: number
+      plannedWeight: number | null
+      position: number
+      supersetId: string | null
+      previousTotalVolume: number | null
+      previousSessionDate: string | null
+      currentSet: number
+      isCompleted: boolean
+      restTimer: number | null
+      createdAt: string
+      totalVolume: number (computed)
+      volumeChange: number | null (computed)
+      volumeChangePercentage: number | null (computed)
+    relationships:
+      session: WorkoutSession
+      completedSets: CompletedSet[]
+    computed:
+      - totalVolume = sum(completedSets[].reps * completedSets[].weight)
+      - volumeChange = totalVolume - previousTotalVolume (if prev exists)
+      - volumeChangePercentage = ((total - prev) / prev) * 100 (if prev > 0)
+
+  CompletedSet:
+    fields:
+      id: string (uuid)
+      reps: number
+      weight: number
+      isCompleted: boolean
+      position: number
+      externalSampleId: string | null (uuid)
+    relationships:
+      sessionExercise: SessionExercise
+
+  PerformedExercise:
+    fields:
+      id: string (uuid)
+      performedAt: string
+      reps: number
+      weight: number
+      exerciseId: string (uuid)
+      workoutSessionId: string | null (uuid)
+
+  ProgressPhoto:
+    fields:
+      id: string (uuid)
+      date: string
+      angle: enum PhotoAngle
+      assetIdentifier: string  # filename or absolute URL
+      weightSampleId: string | null (uuid)
+      notes: string
+      manualWeight: number | null
+      createdAt: string
+
+enums:
+  ExerciseCategory: [strength, cardio, mobility, balance]
+  Weekday: [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+  PhotoAngle: [front, side, back]
+
+swift_to_json_mapping:
+  Exercise:
+    id: UUID → string
+    mediaAssetID: String? → mediaAssetId
+  ExerciseTemplate:
+    exercise: Exercise → exerciseId
+    supersetID: UUID? → supersetId
+  SessionExercise:
+    exercise: Exercise → exerciseId
+  CompletedSet:
+    externalSampleUUID → externalSampleId
+  PerformedExercise:
+    workoutSession → workoutSessionId
+
+
