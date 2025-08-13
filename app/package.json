@@ -8,9 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
-    "test:headless": "playwright test"
+    "test": "vitest run",
+    "test:ui": "vitest",
+    "test:e2e:smoke": "playwright test tests/e2e/smoke.spec.ts",
+    "e2e:install": "npx playwright install --with-deps"
   },
   "dependencies": {
     "dexie": "^4.0.11",

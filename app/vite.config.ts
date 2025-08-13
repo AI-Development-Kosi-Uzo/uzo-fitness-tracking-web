@@ -9,4 +9,7 @@ export default defineConfig({
     port: 5174,
     allowedHosts: ['host.docker.internal', 'localhost', '127.0.0.1', '192.168.86.33'],
   },
+  // Vitest config lives under the "vitest" key when using Vite's config file
+  // but TypeScript typing for defineConfig(UserConfig) may not include it.
+  // We'll configure Vitest via a separate vitest.config.ts if needed later.
 })
