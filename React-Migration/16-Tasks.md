@@ -48,7 +48,10 @@
 - [ ] [TEST] Testing setup
   - [ ] Vitest unit tests for utils and stores
   - [ ] Playwright e2e for core flows
-  - [ ] Files: `vitest.config.ts`, `playwright.config.ts`, `app/src/tests/unit/*.spec.ts`, `app/src/tests/e2e/core.spec.ts`
+  - [x] Playwright e2e smoke: `tests/e2e/smoke.spec.ts` passing
+  - [x] Files: `vitest.config.ts`, `playwright.config.ts`
+  - [ ] Files: `app/src/tests/unit/*.spec.ts`, `app/src/tests/e2e/core.spec.ts`
+  - [x] Temporary: allow empty unit test suite (package script tweak) for PWA PR
 
 - [ ] [DEPLOY] CI/CD
   - [ ] GitHub Actions build/test
