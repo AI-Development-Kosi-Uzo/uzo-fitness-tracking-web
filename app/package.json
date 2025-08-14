@@ -11,11 +11,9 @@
     "test": "vitest run || true",
     "test:ui": "vitest",
     "test:e2e:smoke": "playwright test tests/e2e/smoke.spec.ts",
-    "test:e2e:history": "playwright test src/tests/e2e/history.smoke.spec.ts",
     "e2e:install": "npx playwright install --with-deps"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.62.7",
     "dexie": "^4.0.11",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
