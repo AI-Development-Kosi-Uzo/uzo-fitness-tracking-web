@@ -32,7 +32,7 @@ Owns (only these paths):
 
 Rules:
 - Do NOT modify 01/02/04/05/06. Use repository interfaces; no schema changes.
-- Small PRs with unit + minimal e2e smoke for touched routes.
+- Complete all tasks for this epic; ensure all unit and e2e tests pass before opening a PR.
 - PR description: list the exact checkboxes from 16-Tasks.md you completed.
 
 Branching within this worktree (keep worktree persistent)
@@ -58,16 +58,11 @@ File list:
 - app/src/tests/unit/permissions.spec.ts
 - app/src/tests/e2e/settings.smoke.spec.ts
 
-First PR boundary:
-- `/settings` route renders two sections: Permissions (camera/photos, notifications) and Preferences (a couple of stub toggles).
-- Feature detection utility returns statuses; buttons are disabled if unsupported.
-- E2E smoke: route mounts; sections and key elements render.
-
 On success (commit & PR)
 ```bash
 # Ensure you're on your feature branch (migration/settings-NN-<summary>)
 cd app
-npm run build && npm run test && npx playwright test --project=chromium --grep "smoke|settings"
+npm run build && npm run test && npx playwright test --project=chromium
 cd ..
 git add -A
 git commit -m "feat(settings): <short summary>"

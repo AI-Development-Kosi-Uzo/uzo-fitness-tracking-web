@@ -32,7 +32,7 @@ Owns (only these paths):
 
 Rules:
 - Do NOT modify 01/02/04/05/06. Use repository interfaces; no schema changes.
-- Small PRs with unit + minimal e2e smoke for touched routes.
+- Complete all tasks for this epic; ensure all unit and e2e tests pass before opening a PR.
 - PR description: list the exact checkboxes from 16-Tasks.md you completed.
 
 Branching within this worktree (keep worktree persistent)
@@ -56,10 +56,6 @@ File list:
 - app/src/tests/unit/example.spec.ts
 - app/src/tests/e2e/core.smoke.spec.ts
 - .github/workflows/ci.yml
-
-First PR boundary:
-- Working Vitest and Playwright configs; one passing unit (utils) and one passing e2e smoke.
-- CI workflow running install/build/test on push/PR.
 
 On success (commit & PR)
 ```bash

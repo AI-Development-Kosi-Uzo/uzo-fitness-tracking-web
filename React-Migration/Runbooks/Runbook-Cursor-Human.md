@@ -23,6 +23,17 @@ This guide helps you coordinate multiple agents in Cursor to implement the React
 - Ask the background agent to work in short PRs (one checkbox at a time from `16-Tasks.md`).
 - Require local gates to pass before opening PR: typecheck, lint, unit, e2e smoke, build.
 
+#### Current parallelization and dependencies
+- Can run in parallel now
+  - Agents D/E/F/G: UI components per `16-Tasks.md` → Remaining Tasks by Parallel Workstream
+  - Agent P: `app/src/data/outbox.ts` + SW registration and app shell precache
+  - Agent T: Vitest baseline for utils/stores; Playwright smoke
+  - Agent A: Vercel project + preview deploys
+- Must wait / sequence
+  - Agent B must complete Supabase local (`supabase init`/`start`), migrations (`supabase db reset`), `.env.local`, and remote repos before enabling remote sync
+  - Agent P remote background sync wiring waits for Agent B’s remote repos and `.env`
+  - Agent A production deploy waits for green CI and `.env`
+
 4) Guardrails to avoid conflicts
 - Only edit within owned folders for that epic; no cross-feature imports.
 - UI and routes must use repository interfaces/hooks; never import Dexie/Supabase directly.
@@ -33,9 +44,10 @@ This guide helps you coordinate multiple agents in Cursor to implement the React
 - You review PRs once/twice daily; require rebase to `main` if stale.
 - Keep PRs < 400 LOC net when possible; insist on tests for changed code.
 - Close or pause background threads temporarily during contract freeze windows.
+- Enforce task hygiene: require agents to update checkboxes in `React-Migration/16-Tasks.md` upon merge and reference the PR number.
 
 6) Quick background-agent message to paste (top of each thread)
-"Follow pinned docs. Edit only your owned paths. Use repo interfaces only. Run: typecheck, lint, unit, e2e smoke, build before PR. Branch: migration/<epic>. Keep PRs small. If a contract change is needed, propose via migration/core with ADR and announce freeze window."
+"Follow pinned docs. Edit only your owned paths. Use repo interfaces only. Run: typecheck, lint, unit, e2e smoke, build before PR. Branch: migration/<epic>. Keep PRs small. Update React-Migration/16-Tasks.md checkboxes on merge (include PR #). If a contract change is needed, propose via migration/core with ADR and announce freeze window."
 
 7) Enforced checks and ownership (optional)
 - Add CODEOWNERS for owned paths.
@@ -43,7 +55,7 @@ This guide helps you coordinate multiple agents in Cursor to implement the React
 
 #### Sequential steps (exact order for a separate migration repo)
 1. Create Core branch and bring specs into the repo
-   - Copy the entire `Docs/React-Migration/` folder (including `Runbooks/AGENT-RUNBOOK.md`) to the root of your migration repo
+   - Copy the entire `React-Migration/` folder (including `Runbooks/AGENT-RUNBOOK.md`) to the root of your migration repo
    - Create branch:
    ```bash
    git checkout -b migration/core
@@ -129,9 +141,9 @@ This guide helps you coordinate multiple agents in Cursor to implement the React
 
 #### 2) Cursor workspace setup
 - Create a new folder `app/` at repo root (PWA project)
-- Open files side-by-side: `Docs/React-Migration/16-Tasks.md`, `Docs/React-Migration/Runbooks/AGENT-RUNBOOK.md`, the epic-specific spec under `Docs/React-Migration/09-Component-Specs/`
+- Open files side-by-side: `React-Migration/16-Tasks.md`, `React-Migration/Runbooks/AGENT-RUNBOOK.md`, the epic-specific spec under `React-Migration/09-Component-Specs/`
 - Pin the contracts files in Cursor so agents see them
-- Optional: create `Docs/React-Migration/tasks-migration.md` to track live checkboxes (copy items from `16-Tasks.md`)
+- Optional: create `React-Migration/tasks-migration.md` to track live checkboxes (copy items from `16-Tasks.md`)
 
 #### 3) Spin up parallel agent threads in Cursor
 - Create one Cursor chat per epic (Logging, Library, History, Progress, PWA/Infra, Testing/CI)
@@ -501,6 +513,153 @@ Rules:
 - PR description: list the exact checkboxes from 16-Tasks.md you completed.
 
 Before coding, reply with: plan, file list, first PR boundary.
+```
+
+##### Ready-to-paste templates for remaining parallel work
+
+###### Logging (UI components)
+```markdown
+You are the Logging agent for UzoFitness React PWA.
+
+Branch: migration/logging
+Owns: app/src/routes/log/**, app/src/components/log/**, tests under app/src/tests/**
+
+Tasks (from React-Migration/16-Tasks.md → Remaining Tasks by Parallel Workstream):
+- [ ] Build ExerciseRow, SetRow, RestTimerButton, RestTimerPicker, SessionHeader
+
+Rules:
+- Use repository interfaces only; do not change contracts.
+- Keep PRs small; 1–2 checkboxes per PR. Update React-Migration/16-Tasks.md on merge and include (PR #).
+
+Gates before PR: typecheck, lint, unit, e2e smoke, build.
+
+First PR boundary:
+- Route stubs render; add timers.store basic unit test; e2e smoke for /log and /log/session.
+```
+
+###### Library (UI components)
+```markdown
+You are the Library agent for UzoFitness React PWA.
+
+Branch: migration/library
+Owns: app/src/routes/library/**, app/src/components/library/**, tests under app/src/tests/**
+
+Tasks:
+- [ ] Build TemplateEditor, DayList, ExerciseTemplateRow, ExercisePicker
+
+Rules: repository interfaces only; small PRs; update 16-Tasks.md on merge with PR #.
+Gates: typecheck, lint, unit, e2e smoke, build.
+
+First PR boundary:
+- /library read-only lists + basic create dialogs (validated) + e2e smoke.
+```
+
+###### History (UI components)
+```markdown
+You are the History agent for UzoFitness React PWA.
+
+Branch: migration/history
+Owns: app/src/routes/history/**, app/src/components/history/**, tests under app/src/tests/**
+
+Tasks:
+- [ ] Build Calendar, SessionList
+
+Rules: repository interfaces only; small PRs; update 16-Tasks.md on merge with PR #.
+Gates: typecheck, lint, unit, e2e smoke, build.
+
+First PR boundary:
+- Calendar + list skeletons wired to workoutSessions; streaks util + unit test; e2e smoke.
+```
+
+###### Progress (UI components)
+```markdown
+You are the Progress agent for UzoFitness React PWA.
+
+Branch: migration/progress
+Owns: app/src/routes/progress/**, app/src/components/progress/**, tests under app/src/tests/**
+
+Tasks:
+- [ ] Build Chart, PhotoGrid, CompareView, EditPhotoModal
+
+Rules: repository interfaces only; small PRs; update 16-Tasks.md on merge with PR #.
+Gates: typecheck, lint, unit, e2e smoke, build.
+
+First PR boundary:
+- /progress/stats placeholder chart + /progress/photos grid skeleton; unit for trend aggregation; e2e smoke.
+```
+
+###### PWA/Infra (local sync + SW)
+```markdown
+You are the PWA/Infra agent for UzoFitness React PWA.
+
+Branch: migration/pwa-infra
+Owns: app/public/**, app/src/sw/**, app/src/data/outbox.ts, workbox.config.ts, app/src/sw/registerSW.ts, tests
+
+Tasks:
+- [ ] Implement app/src/data/outbox.ts and integrate with SW for background sync
+
+Rules:
+- Local outbox + SW/precaching can proceed now. Remote sync wiring must wait for Data agent to provide Supabase `.env` and remote repos.
+- Small PRs; update 16-Tasks.md on merge with PR #.
+Gates: typecheck, lint, unit, e2e smoke, build.
+
+First PR boundary:
+- Manifest + SW registration + app shell precache; outbox skeleton + unit test; offline shell e2e smoke.
+```
+
+###### Data-Sync (Supabase local + remote repos)
+```markdown
+You are the Data-Sync agent for UzoFitness React PWA.
+
+Branch: migration/data-sync
+Owns: app/src/data/supabaseClient.ts, app/src/data/repositories/** (remote mirrors), app/.env.local, Supabase migrations
+
+Tasks:
+- [ ] Initialize CLI project and start local stack: supabase init, supabase start
+- [ ] Create migration from 10-API-Contracts.md and apply: supabase db reset
+- [ ] Add env: app/.env.local with local URL/key
+- [ ] Create app/src/data/supabaseClient.ts and remote repositories mirroring local repos
+
+Rules: do not change contracts; keep PRs small; update 16-Tasks.md on merge with PR #.
+Gates: typecheck, lint, unit, e2e smoke, build.
+
+First PR boundary:
+- Supabase initialized + migrations applied + app/.env.local example + supabaseClient scaffold.
+```
+
+###### Testing/CI
+```markdown
+You are the Testing/CI agent for UzoFitness React PWA.
+
+Branch: migration/testing-ci
+Owns: vitest/playwright configs, app/src/setupTests.ts, app/src/tests/**, .github/workflows/**
+
+Tasks:
+- [ ] Add Vitest unit tests for utils and stores; keep Playwright e2e smoke green
+
+Rules: small PRs; update 16-Tasks.md on merge with PR #.
+Gates: typecheck, lint, unit, e2e smoke, build.
+
+First PR boundary:
+- Working Vitest/Playwright configs; one unit test + one e2e smoke; CI workflow running.
+```
+
+###### Deploy
+```markdown
+You are the Deploy agent for UzoFitness React PWA.
+
+Branch: migration/deploy
+Owns: Vercel configuration and deploy setup
+
+Tasks:
+- [ ] Configure Vercel deployment (project, preview deploys)
+
+Rules:
+- Preview deploys can start now. Production deployment must wait for green CI and required `.env` from Data-Sync.
+- Small PRs; update 16-Tasks.md on merge with PR #.
+
+First PR boundary:
+- Vercel project configured with preview deployments on PRs; document required envs.
 ```
 
 #### 4) Core agent (start first)

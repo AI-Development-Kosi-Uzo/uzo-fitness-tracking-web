@@ -5,18 +5,8 @@ Pinned
 @.cursor/rules/10-rebase-worktrees.md
 @React-Migration/Runbooks/AGENT-RUNBOOK.md
 @React-Migration/Runbooks/Runbook-Cursor-Agent.md
-@React-Migration/01-Domain-Models.yml
-@React-Migration/02-Feature-Map.md
-@React-Migration/04-Design-Tokens.json
-@React-Migration/05-React-Architecture.md
-@React-Migration/06-Data-Layer-Spec.md
 @React-Migration/07-PWA-Spec.md
 @React-Migration/16-Tasks.md
-@app/src/data/types.ts
-@app/src/data/db.ts
-@app/src/data/queryKeys.ts
-@app/src/data/repositories/contracts.ts
-@app/src/routes/paths.ts
 
 Kickoff
 You are the PWA/Infra agent for UzoFitness React PWA.
@@ -34,23 +24,17 @@ Owns (only these paths):
 
 Rules:
 - Do NOT modify 01/02/04/05/06. Use repository interfaces; no schema changes.
-- Small PRs with unit + minimal e2e smoke for touched routes.
+- Complete all tasks for this epic; ensure all unit and e2e tests pass before opening a PR.
 - PR description: list the exact checkboxes from 16-Tasks.md you completed.
+- On merge, update React-Migration/16-Tasks.md and include (PR #).
+- Remote sync wiring must wait for Data-Sync agent to provide Supabase `.env` and remote repos.
 
 Branching within this worktree (keep worktree persistent)
 - Create feature branches off `origin/main` using:
   - `migration/pwa-infra-NN-<short-dashed-summary>`
-- Example:
-```bash
-git fetch origin --prune
-git switch -c migration/pwa-infra-01-manifest-and-sw-registration origin/main
-```
 
-Plan:
-- Add `manifest.webmanifest` and icons; register Workbox SW.
-- Implement mutation outbox and Background Sync tag `uzofitness-sync`.
-- Configure precaching of app shell; runtime strategies for images/GETs.
-- Add install prompt strategy.
+Tasks (from React-Migration/16-Tasks.md → Remaining Tasks by Parallel Workstream):
+- [ ] Implement app/src/data/outbox.ts and integrate with SW for background sync
 
 File list:
 - app/public/manifest.webmanifest
@@ -60,28 +44,3 @@ File list:
 - app/src/sw/registerSW.ts
 - app/src/tests/integration/offline.queue.spec.ts
 - app/src/tests/e2e/offline.smoke.spec.ts
-
-First PR boundary:
-- Manifest + SW registration + minimal Workbox config producing a built SW with app shell precache.
-- Outbox module skeleton with enqueue/dequeue and a unit test.
-- E2E smoke: service worker registered; offline navigates cached shell.
-
-On success (commit & PR)
-```bash
-# Ensure you're on your feature branch (migration/pwa-infra-NN-<summary>)
-cd app
-npm run build && npm run test && npx playwright test --project=chromium --grep "smoke|offline"
-cd ..
-git add -A
-git commit -m "feat(pwa-infra): <short summary>"
-# Pre-PR rebase and push (see 10-rebase-worktrees.md)
-git fetch origin --prune
-git rebase --rebase-merges --autostash origin/main
-git push --force-with-lease -u origin HEAD
-
-# Create PR (Squash and merge; requires GitHub CLI)
-BR=$(git rev-parse --abbrev-ref HEAD)
-gh pr create --base main --head "$BR" --fill --title "feat(pwa-infra): <short summary>"
-```
-
-

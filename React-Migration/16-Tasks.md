@@ -85,3 +85,54 @@ Rules
 ---
 
 
+
+### Remaining Tasks by Parallel Workstream
+
+- Agent D — Logging Feature
+  - [ ] Build `ExerciseRow`, `SetRow`, `RestTimerButton`, `RestTimerPicker`, `SessionHeader` in `app/src/components/log/*`
+
+- Agent E — Library Feature
+  - [ ] Build `TemplateEditor`, `DayList`, `ExerciseTemplateRow`, `ExercisePicker` in `app/src/components/library/*`
+
+- Agent F — History Feature
+  - [ ] Build `Calendar`, `SessionList` in `app/src/components/history/*`
+
+- Agent G — Progress Feature
+  - [ ] Build `Chart` components, `PhotoGrid`, `CompareView`, `EditPhotoModal` in `app/src/components/progress/*`
+
+- Agent P — PWA & Sync
+  - [ ] Implement `app/src/data/outbox.ts` and integrate with SW for background sync
+
+- Agent B — Data Layer & Contracts
+  - [ ] Initialize local Supabase (`supabase init`, `supabase start`)
+  - [ ] Create migration from `10-API-Contracts.md` and apply (`supabase db reset`)
+  - [ ] Add `app/.env.local` with local URL/key
+  - [ ] Create `app/src/data/supabaseClient.ts` and remote repositories mirroring local repos
+
+- Agent T — Testing & QA
+  - [ ] Add Vitest unit tests for utils and stores
+
+- Agent A — Foundation & CI
+  - [ ] Configure Vercel deployment
+
+Execution order and parallelization
+
+- Parallel now
+  - Agents D/E/F/G: UI components listed above
+  - Agent P: `app/src/data/outbox.ts` + service worker registration and app shell precache
+  - Agent T: Vitest baseline unit tests for utils/stores; keep Playwright smoke green
+  - Agent A: Vercel project and preview deployments
+
+- Wait / sequence
+  - Agent B: complete Supabase local setup and remote repositories before enabling remote sync
+    1) `supabase init` + `supabase start`
+    2) Migrations from `10-API-Contracts.md` → `supabase db reset`
+    3) Add `app/.env.local` (URL/key)
+    4) Create `app/src/data/supabaseClient.ts` and remote repositories
+  - Agent P: remote background sync wiring waits for Agent B's remote repos and `.env`
+  - Agent A: production deployment waits for green CI and required `.env`
+
+- Task update protocol
+  - Each agent must update this file when merging a PR: check the relevant boxes under your agent and optionally append `(PR #<number>)`.
+  - In PR descriptions, list the exact checkboxes from this file that are being completed.
+  - If scope changes or tasks are split, reflect that here immediately to keep parallel work aligned.

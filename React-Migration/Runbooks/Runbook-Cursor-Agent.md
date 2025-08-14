@@ -14,7 +14,7 @@ Follow this strictly. Do not change contracts without approval. Also consult the
 - Tasks: ../16-Tasks.md
 
 #### 2) If Core agent
-- Scaffold Vite app in `app/`; install deps (see Docs/React-Migration/Runbooks/AGENT-RUNBOOK.md)
+- Scaffold Vite app in `app/`; install deps (see React-Migration/Runbooks/AGENT-RUNBOOK.md)
 - Create files and empty stubs per `16-Tasks.md` “ARCH” and “DATA”
 - Add TS types and Dexie schema; implement repository interfaces with mock data
 - Push branch `migration/core`; open PR
@@ -25,6 +25,7 @@ Follow this strictly. Do not change contracts without approval. Also consult the
 - Use repositories and types; do not modify contracts
 - Add unit tests (Vitest) and route smoke (Playwright) for your changes
 - Open small PRs; mention which checkboxes you’re completing
+- Select your next items from `../16-Tasks.md` → “Remaining Tasks by Parallel Workstream” and follow “Execution order and parallelization”. Do not start remote sync until Data (Agent B) publishes Supabase env and remote repositories.
 
 #### 4) Coding rules
 - File paths must match `05-React-Architecture.md` and `16-Tasks.md`
@@ -51,7 +52,8 @@ Follow this strictly. Do not change contracts without approval. Also consult the
 - [ ] No contract file edits
 - [ ] Files placed under the agreed paths
 - [ ] Unit and e2e tests included/passing for changed routes
-- [ ] 16-Tasks.md items updated in description
+- [ ] `React-Migration/16-Tasks.md` updated: check relevant boxes under your agent and optionally append `(PR #<number>)`
+- [ ] PR description lists the exact checkboxes from `16-Tasks.md` that were completed
 
 Escalations
 - If a contract change is needed, open an issue and propose a focused PR targeting `migration/core` only.

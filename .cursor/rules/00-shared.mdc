@@ -21,7 +21,7 @@ Contracts in code (frozen once Core PR merges):
 @app/src/routes/paths.ts
 
 Branching
-- migration/core
+- migration/core (or migration/data-sync)
 - migration/logging
 - migration/library
 - migration/history
@@ -35,8 +35,15 @@ Rules
 - Ship in small PRs. Each PR must include unit tests; if a route renders, include a minimal e2e smoke.
 - Own only your epic paths. Do not modify others’ folders.
 - Reference repository interfaces; do not change schema.
- - Always rebase feature branches onto `origin/main` before opening a PR and again after the PR is merged.
- - Merge strategy: use GitHub "Squash and merge" for all PRs (linear history; no merge commits).
+- Always rebase feature branches onto `origin/main` before opening a PR and again after the PR is merged.
+- Merge strategy: use GitHub "Squash and merge" for all PRs (linear history; no merge commits).
+- Task hygiene: on merge, update the relevant checkboxes in `React-Migration/16-Tasks.md` and include your PR number.
+
+See also
+@.cursor/rules/OWNERSHIP.md
+@.cursor/rules/PARALLELIZATION.md
+@.cursor/rules/PR-CHECKLIST.md
+@.cursor/rules/KICKOFF-TEMPLATES.md
 
 Feature branch convention (keep worktrees persistent)
 - Keep one persistent worktree per epic pointing to `migration/<epic>`.
