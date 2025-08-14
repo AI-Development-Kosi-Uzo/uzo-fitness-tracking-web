@@ -25,7 +25,7 @@ export const LibraryPage = () => {
 					<ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
 						{templates.map((t) => (
 							<li key={t.id} style={{ marginBottom: 8 }}>
-								<Link to="/library/templates/$templateId" params={{ templateId: t.id }}>
+								<Link to="/library/templates/$templateId" params={{ templateId: t.id } as const}>
 									<div style={{ border: '1px solid #eee', borderRadius: 8, padding: 12 }}>
 										<div style={{ fontWeight: 700 }}>{t.name}</div>
 										<div style={{ color: '#666' }}>{t.summary}</div>
