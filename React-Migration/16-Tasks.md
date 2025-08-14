@@ -1,15 +1,17 @@
 ### Task Plan (Epics → Tasks)
 
 - [ ] [ARCH] Initialize project scaffold (Vite + React 18 + TS + SWC + Tailwind)
-  - [ ] Create `app/` with `src/` structure, tokens CSS, Tailwind config
-  - [ ] Add TanStack Router, Zustand, React Query, RHF, Zod, Dexie, Recharts, Workbox
-  - [ ] Files: `app/index.html`, `app/src/main.tsx`, `app/src/styles/tokens.css`, `tailwind.config.js`, `postcss.config.js`, `vite.config.ts`
+  - [x] Create `app/` with `src/` structure, tokens CSS, Tailwind config
+  - [ ] Add Zustand, React Query, RHF, Zod, Recharts, Workbox
+  - [x] Add TanStack Router, Dexie
+  - [x] Files: `app/index.html`, `app/src/main.tsx`, `app/src/styles/tokens.css`, `tailwind.config.js`, `postcss.config.js`, `vite.config.ts`
 
 - [ ] [DATA] Implement Dexie schema and repositories
-  - [ ] Define types from `01-Domain-Models.yml`
-  - [ ] Create tables and indexes; write CRUD repos
+  - [x] Define types from `01-Domain-Models.yml`
+  - [x] Create tables and indexes; write CRUD repos (memory repos in place)
   - [ ] Seed sample data for dev
-  - [ ] Files: `app/src/data/types.ts`, `app/src/data/db.ts`, `app/src/data/repositories/*.ts`, `app/src/data/seed.ts`
+  - [x] Files: `app/src/data/types.ts`, `app/src/data/db.ts`, `app/src/data/repositories/*.ts`
+  - [ ] Files: `app/src/data/seed.ts`
 
 - [ ] [STATE] Create Zustand stores
   - [ ] Timers store (workout/rest) with visibility pause
@@ -17,6 +19,7 @@
   - [ ] Files: `app/src/state/timers.store.ts`, `app/src/state/ui.store.ts`
 
 - [ ] [ROUTES] Implement routes and layouts
+  - [x] Base router and redirect to `/log`
   - [ ] Root + bottom nav
   - [ ] `/log` + SessionModal
   - [ ] `/library` + template editor + exercises
@@ -47,8 +50,9 @@
 
 - [ ] [TEST] Testing setup
   - [ ] Vitest unit tests for utils and stores
-  - [ ] Playwright e2e for core flows
-  - [ ] Files: `vitest.config.ts`, `playwright.config.ts`, `app/src/tests/unit/*.spec.ts`, `app/src/tests/e2e/core.spec.ts`
+  - [x] Playwright e2e smoke in place
+  - [x] Files: `vitest.config.ts`, `playwright.config.ts`
+  - [x] Files: `app/src/tests/e2e/smoke.spec.ts`
 
 - [ ] [DEPLOY] CI/CD
   - [ ] GitHub Actions build/test
@@ -57,5 +61,26 @@
 
 References
 - See docs in this folder, esp. `05-React-Architecture.md`, `06-Data-Layer-Spec.md`, `07-PWA-Spec.md`.
+
+### Parallel Workstreams & Agent Ownership
+
+- Agent A — Foundation & CI (owns: root configs, `app/index.html`, build/test configs)
+- Agent B — Data Layer & Contracts (owns: `app/src/data/**/*`, `01-Domain-Models.yml` alignment)
+- Agent C — Routing & Shell (owns: `app/src/routes/root.tsx`, providers in `app/src/main.tsx`)
+- Agent D — Logging Feature (owns: `app/src/routes/log/**/*`, `app/src/components/log/**/*`)
+- Agent E — Library Feature (owns: `app/src/routes/library/**/*`, `app/src/components/library/**/*`)
+- Agent F — History Feature (owns: `app/src/routes/history/**/*`, `app/src/components/history/**/*`)
+- Agent G — Progress Feature (owns: `app/src/routes/progress/**/*`, `app/src/components/progress/**/*`)
+- Agent H — Settings Feature (owns: `app/src/routes/settings/**/*`)
+- Agent P — PWA & Sync (owns: `app/sw/**/*`, Workbox/Vite PWA config)
+- Agent T — Testing & QA (owns: test infra, Playwright/Vitest suites)
+
+Rules
+- Do not modify areas owned by another agent.
+- UI/Routes may only import data via repository interfaces; no direct Dexie/Supabase from routes/components.
+- Contract/interface changes must be proposed by Agent B with a small ADR and a short freeze window announcement.
+- Short-lived branches: `feat/<area>-<task>`; rebase daily onto `main` to reduce conflicts.
+
+---
 
 

@@ -23,4 +23,17 @@ CI (GitHub Actions)
 Why Vercel
 - Fast previews, first-class Vite support, SW-friendly. Netlify is comparable; either works.
 
+<<<<<<< Current (Your changes)
+=======
+#### Branching & PRs
+- `main` protected: requires green CI and reviews
+- Feature branches: `feat/<area>-<task>`; rebase daily
+- PRs should be <400 LOC net where possible; focus scope to owned areas
+
+#### CI Gates (per PR)
+- Install deps, typecheck, lint, unit tests (Vitest), e2e smoke (Playwright), build
+- Bundle size check with threshold; fail if exceeded
+- Optional Lighthouse CI on preview URLs
+
+>>>>>>> Incoming (Background Agent changes)
 

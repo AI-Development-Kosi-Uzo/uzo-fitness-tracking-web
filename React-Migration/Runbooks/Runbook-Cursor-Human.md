@@ -7,6 +7,40 @@ This guide helps you coordinate multiple agents in Cursor to implement the React
 - Freeze contracts: [01-Domain-Models.yml](../01-Domain-Models.yml), [06-Data-Layer-Spec.md](../06-Data-Layer-Spec.md), [02-Feature-Map.md](../02-Feature-Map.md), [04-Design-Tokens.json](../04-Design-Tokens.json), [05-React-Architecture.md](../05-React-Architecture.md)
 - Decide now if Supabase sync is in-scope for MVP (see [10-API-Contracts.md](../10-API-Contracts.md))
 
+#### Using Cursor Background Agents (run multiple epics concurrently)
+
+1) Create one Cursor thread per epic/workstream
+- Core (contracts + scaffold), Logging, Library, History, Progress, Settings, PWA/Infra, Testing/CI.
+- Name threads clearly (e.g., "UzoFitness – Progress (BG)").
+
+2) Pin scope and rules in each thread
+- Pin these docs: `Runbooks/AGENT-RUNBOOK.md`, this runbook, `16-Tasks.md`, the epic spec under `09-Component-Specs`, and contracts (`01`, `02`, `04`, `05`, `06`).
+- Post the relevant kickoff from the "Kickoff templates" below as the first message.
+- Explicitly restate ownership paths the agent may edit and forbid contract changes.
+
+3) Branch and background execution
+- Set the branch to use per thread (e.g., `migration/progress`).
+- Ask the background agent to work in short PRs (one checkbox at a time from `16-Tasks.md`).
+- Require local gates to pass before opening PR: typecheck, lint, unit, e2e smoke, build.
+
+4) Guardrails to avoid conflicts
+- Only edit within owned folders for that epic; no cross-feature imports.
+- UI and routes must use repository interfaces/hooks; never import Dexie/Supabase directly.
+- If a contract change is needed, the agent must propose a tiny PR from `migration/core` with an ADR; no silent edits.
+- Rebase daily onto `main` before opening a PR.
+
+5) Cadence and monitoring
+- You review PRs once/twice daily; require rebase to `main` if stale.
+- Keep PRs < 400 LOC net when possible; insist on tests for changed code.
+- Close or pause background threads temporarily during contract freeze windows.
+
+6) Quick background-agent message to paste (top of each thread)
+"Follow pinned docs. Edit only your owned paths. Use repo interfaces only. Run: typecheck, lint, unit, e2e smoke, build before PR. Branch: migration/<epic>. Keep PRs small. If a contract change is needed, propose via migration/core with ADR and announce freeze window."
+
+7) Enforced checks and ownership (optional)
+- Add CODEOWNERS for owned paths.
+- Use `.cursor/rules/*` in this repo as the policy source for consistency.
+
 #### Sequential steps (exact order for a separate migration repo)
 1. Create Core branch and bring specs into the repo
    - Copy the entire `Docs/React-Migration/` folder (including `Runbooks/AGENT-RUNBOOK.md`) to the root of your migration repo
@@ -507,3 +541,58 @@ Quick links
 - Data: [../01-Domain-Models.yml](../01-Domain-Models.yml), [../06-Data-Layer-Spec.md](../06-Data-Layer-Spec.md)
 
 
+
+#### Local environment needed for proper testing (macOS)
+
+Required
+- Node.js 20 LTS (18+ OK), pnpm 8+ (or npm 10+), Git
+- Playwright with Chromium installed for e2e
+- Docker Desktop (only if running Supabase locally)
+
+Recommended
+- Supabase CLI for optional local sync (`supabase start`)
+- direnv for `.env.local` handling
+
+One‑time setup
+```bash
+# Node + pnpm
+brew install node@20 && corepack enable && corepack prepare pnpm@latest --activate
+
+# (Optional) Supabase local stack
+brew install supabase/tap/supabase
+# Requires Docker Desktop running
+
+# In repo root
+pnpm install
+npx playwright install chromium
+
+# If using Supabase locally (optional sync work)
+supabase init || true
+supabase start
+```
+
+Per‑agent local commands
+```bash
+# type, lint, unit, e2e smoke, build
+pnpm typecheck && pnpm lint && pnpm test -- --run && pnpm e2e:smoke && pnpm build
+
+# Dev server
+pnpm dev
+
+# Preview production build (for SW tests)
+pnpm build && pnpm preview
+```
+
+Environment variables
+- Create `app/.env.local` if Supabase is used:
+  - `VITE_SUPABASE_URL=http://127.0.0.1:54321`
+  - `VITE_SUPABASE_ANON_KEY` (from `supabase status`)
+- If sync is out of scope, ensure UI uses memory/Dexie repos only and guard remote features behind flags.
+
+PWA/Service Worker testing notes
+- Service workers are only active on production builds/preview. Use `pnpm build && pnpm preview` for SW/offline tests.
+- Background Sync typically requires HTTPS; local testing relies on Workbox allowances with localhost.
+
+Playwright notes
+- Ensure `npx playwright install chromium` has run.
+- E2E tests should launch the dev server or preview server as part of the test setup.

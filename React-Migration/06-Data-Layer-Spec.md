@@ -55,4 +55,21 @@ Indexes chosen to support common queries: list templates, day exercises by order
 #### Derived computations
 - Utilities compute `totalVolume`, `volumeChange` in-memory; persist cached last-used values on session finish
 
+<<<<<<< Current (Your changes)
+=======
+#### Contracts, Versioning, and Freeze Windows
+- Repository interfaces are the stable API for all UI. Changes require:
+  - ADR (1-pager) from Agent B
+  - Minor version bump and codemod notes if signatures change
+  - 24–48h freeze window announcement before merge
+
+#### React Query Keys
+- Provide stable, centralized factories in `app/src/data/queryKeys.ts`
+- Never inline string keys in routes/components
+
+#### Access Pattern (Enforced)
+- Routes/components consume `useXxxQuery`/`useXxxMutation` helpers that wrap repositories
+- No direct Dexie or Supabase client usage outside `data/`
+
+>>>>>>> Incoming (Background Agent changes)
 
