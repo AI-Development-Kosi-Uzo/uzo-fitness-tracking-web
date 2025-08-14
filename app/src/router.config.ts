@@ -1,4 +1,4 @@
-import { createRootRoute, createRoute, createRouter, redirect } from '@tanstack/react-router'
+import { createRootRoute, createRoute, createRouter, redirect, type AnyRoute } from '@tanstack/react-router'
 import { RootLayout } from './routes/root'
 import { LogPage } from './routes/log'
 import { LogSessionPage } from './routes/log/session'
@@ -83,7 +83,7 @@ const routeTree = rootRoute.addChildren([
   historyRoute,
   progressRoute.addChildren([progressStatsRoute, progressPhotosRoute]),
   settingsRoute,
-])
+]) satisfies AnyRoute
 
 export const router = createRouter({ routeTree })
 
