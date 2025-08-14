@@ -95,7 +95,7 @@ Rules
   - [ ] Build `TemplateEditor`, `DayList`, `ExerciseTemplateRow`, `ExercisePicker` in `app/src/components/library/*`
 
 - Agent F — History Feature
-  - [ ] Build `Calendar`, `SessionList` in `app/src/components/history/*`
+  - [x] Build `Calendar`, `SessionList` in `app/src/components/history/*`
 
 - Agent G — Progress Feature
 - [x] Build `Chart` components, `PhotoGrid`, `CompareView`, `EditPhotoModal` in `app/src/components/progress/*`
