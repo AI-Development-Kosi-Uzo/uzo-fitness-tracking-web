@@ -21,7 +21,7 @@
   - [ ] `/log` + SessionModal
   - [ ] `/library` + template editor + exercises
   - [ ] `/history`
-  - [x] `/progress/stats` + `/progress/photos`
+  - [ ] `/progress/stats` + `/progress/photos`
   - [ ] `/settings`
   - [ ] Files: `app/src/routes/root.tsx`, `app/src/routes/log/index.tsx`, `app/src/routes/log/session.tsx`, `app/src/routes/library/index.tsx`, `app/src/routes/library/template.$id.tsx`, `app/src/routes/library/exercises.tsx`, `app/src/routes/history/index.tsx`, `app/src/routes/progress/stats.tsx`, `app/src/routes/progress/photos.tsx`, `app/src/routes/settings/index.tsx`
 
@@ -29,7 +29,7 @@
   - [ ] ExerciseRow, SetRow, RestTimerButton, RestTimerPicker, SessionHeader
   - [ ] TemplateEditor, DayList, ExerciseTemplateRow, ExercisePicker
   - [ ] Calendar, SessionList
-  - [x] Chart components, PhotoGrid, CompareView, EditPhotoModal
+  - [ ] Chart components, PhotoGrid, CompareView, EditPhotoModal
   - [ ] Files: `app/src/components/log/{ExerciseRow.tsx,SetRow.tsx,RestTimerButton.tsx,RestTimerPicker.tsx,SessionHeader.tsx}`
   - [ ] Files: `app/src/components/library/{TemplateEditor.tsx,DayList.tsx,ExerciseTemplateRow.tsx,ExercisePicker.tsx}`
   - [ ] Files: `app/src/components/history/{Calendar.tsx,SessionList.tsx}`
@@ -46,7 +46,7 @@
   - [ ] Create `app/src/data/supabaseClient.ts` and remote repositories mirroring local repos
 
 - [ ] [TEST] Testing setup
-  - [x] Vitest unit tests for utils and stores
+  - [ ] Vitest unit tests for utils and stores
   - [ ] Playwright e2e for core flows
   - [x] Playwright e2e smoke: `tests/e2e/smoke.spec.ts` passing
   - [x] Files: `vitest.config.ts`, `playwright.config.ts`

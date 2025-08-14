@@ -24,8 +24,8 @@ export const LibraryTemplatePage = () => <div>Library Template</div>
 export const LibraryExercisesPage = () => <div>Library Exercises</div>
 export const HistoryPage = () => <div>History</div>
 export const ProgressLayout = () => <Outlet />
-import ProgressStatsPage from './routes/progress/stats'
-import ProgressPhotosPage from './routes/progress/photos'
+export const ProgressStatsPage = () => <div>Progress Stats</div>
+export const ProgressPhotosPage = () => <div>Progress Photos</div>
 export const SettingsPage = () => <div>Settings</div>
 
 // Route tree
