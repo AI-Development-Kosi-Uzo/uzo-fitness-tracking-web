@@ -35,9 +35,9 @@
   - [ ] Files: `app/src/components/history/{Calendar.tsx,SessionList.tsx}`
   - [ ] Files: `app/src/components/progress/{Chart.tsx,PhotoGrid.tsx,CompareView.tsx,EditPhotoModal.tsx}`
 
-- [x] [SYNC] PWA SW and background sync
-  - [x] Workbox config; mutation outbox + sync (via vite-plugin-pwa generateSW + Workbox backgroundSync)
-  - [x] Files: configured in `app/vite.config.ts` and `app/index.html` (no separate sw.ts/outbox needed)
+- [ ] [SYNC] PWA SW and background sync
+  - [ ] Workbox config; mutation outbox + sync
+  - [ ] Files: `workbox.config.ts`, `app/src/sw/sw.ts`, `app/src/data/outbox.ts`
 
 - [ ] [SYNC-SUPABASE] Local Supabase setup and adapters
   - [ ] Initialize CLI project, start local stack: `supabase init`, `supabase start`
@@ -48,10 +48,7 @@
 - [ ] [TEST] Testing setup
   - [ ] Vitest unit tests for utils and stores
   - [ ] Playwright e2e for core flows
-  - [x] Playwright e2e smoke: `tests/e2e/smoke.spec.ts` passing
-  - [x] Files: `vitest.config.ts`, `playwright.config.ts`
-  - [ ] Files: `app/src/tests/unit/*.spec.ts`, `app/src/tests/e2e/core.spec.ts`
-  - [x] Temporary: allow empty unit test suite (package script tweak) for PWA PR
+  - [ ] Files: `vitest.config.ts`, `playwright.config.ts`, `app/src/tests/unit/*.spec.ts`, `app/src/tests/e2e/core.spec.ts`
 
 - [ ] [DEPLOY] CI/CD
   - [ ] GitHub Actions build/test
