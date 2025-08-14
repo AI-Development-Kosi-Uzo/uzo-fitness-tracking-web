@@ -39,8 +39,9 @@
   - [ ] Files: `app/src/components/progress/{Chart.tsx,PhotoGrid.tsx,CompareView.tsx,EditPhotoModal.tsx}`
 
 - [ ] [SYNC] PWA SW and background sync
-  - [x] Workbox config; mutation outbox + sync (config stub only)
-  - [x] Files: `workbox.config.ts`, `app/src/sw/sw.ts`, `app/src/data/outbox.ts` (outbox pending)
+  - [x] Workbox config (stub only)
+  - [x] Files: `workbox.config.ts`, `app/src/sw/sw.ts`
+  - [ ] Files: `app/src/data/outbox.ts` (pending)
 
 - [ ] [SYNC-SUPABASE] Local Supabase setup and adapters
   - [ ] Initialize CLI project, start local stack: `supabase init`, `supabase start`
