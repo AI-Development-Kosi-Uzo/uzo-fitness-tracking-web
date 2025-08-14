@@ -33,9 +33,9 @@ export const LogSessionPage = () => {
 	const title = useMemo(() => today?.title ?? 'Session', [today])
 
 	return (
-		<div style={{ padding: '16px' }}>
+		<div className="p-4 space-y-4">
 			<SessionHeader title={title} />
-			<div style={{ display: 'grid', gap: 12, marginTop: 16 }}>
+			<div className="grid gap-3">
 				{sessionExercises?.map((se) => (
 					<ExerciseRow key={se.id} exercise={se} />
 				))}

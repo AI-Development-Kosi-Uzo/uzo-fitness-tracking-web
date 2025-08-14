@@ -13,19 +13,19 @@ export const LogPage = () => {
 	const { data: today } = useQuery({ queryKey: queryKeys.todaysWorkoutSession(), queryFn: () => sessionsRepo.getToday() })
 
 	return (
-		<div style={{ padding: '16px' }}>
-			<h1>Log</h1>
+		<div className="p-4 space-y-3">
+			<h1 className="text-2xl font-semibold tracking-tight">Log</h1>
 			{activePlan ? (
-				<div style={{ marginTop: '8px' }}>
-					<div>Active plan: {activePlan.customName}</div>
+				<div className="space-y-2">
+					<div className="text-sm">Active plan: <span className="font-medium">{activePlan.customName}</span></div>
 					{today ? (
-						<Link to={paths.logSession}>Continue today’s session: {today.title}</Link>
+						<Link to={paths.logSession} className="inline-block px-3 py-2 rounded bg-blue-600 text-white text-sm">Continue today’s session: {today.title}</Link>
 					) : (
-						<div>No session scheduled for today.</div>
+						<div className="text-sm text-gray-600">No session scheduled for today.</div>
 					)}
 				</div>
 			) : (
-				<div>No active plan</div>
+				<div className="text-sm text-gray-600">No active plan</div>
 			)}
 		</div>
 	)

@@ -4,7 +4,7 @@ import { useParams } from '@tanstack/react-router'
 export const LibraryTemplatePage = () => {
 	const { templateId } = useParams({ from: '/library/templates/$templateId' })
 	return (
-		<div style={{ paddingBottom: 60 }}>
+		<div className="pb-16 p-4">
 			<TemplateEditor templateId={templateId} />
 		</div>
 	)
