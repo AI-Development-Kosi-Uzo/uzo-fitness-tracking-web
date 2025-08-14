@@ -35,9 +35,9 @@
   - [ ] Files: `app/src/components/history/{Calendar.tsx,SessionList.tsx}`
   - [ ] Files: `app/src/components/progress/{Chart.tsx,PhotoGrid.tsx,CompareView.tsx,EditPhotoModal.tsx}`
 
-- [ ] [SYNC] PWA SW and background sync
-  - [ ] Workbox config; mutation outbox + sync
-  - [ ] Files: `workbox.config.ts`, `app/src/sw/sw.ts`, `app/src/data/outbox.ts`
+- [x] [SYNC] PWA SW and background sync
+  - [x] Workbox config; mutation outbox + sync (via vite-plugin-pwa generateSW + Workbox backgroundSync)
+  - [x] Files: configured in `app/vite.config.ts` and `app/index.html` (no separate sw.ts/outbox needed)
 
 - [ ] [SYNC-SUPABASE] Local Supabase setup and adapters
   - [ ] Initialize CLI project, start local stack: `supabase init`, `supabase start`
