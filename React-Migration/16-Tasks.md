@@ -107,7 +107,7 @@ Rules
   - [ ] Initialize local Supabase (`supabase init`, `supabase start`)
   - [ ] Create migration from `10-API-Contracts.md` and apply (`supabase db reset`)
   - [ ] Add `app/.env.local` with local URL/key
-  - [ ] Create `app/src/data/supabaseClient.ts` and remote repositories mirroring local repos
+  - [x] Create `app/src/data/supabaseClient.ts` and remote repositories mirroring local repos
 
 - Agent T — Testing & QA
   - [x] Add Vitest unit tests for utils and stores

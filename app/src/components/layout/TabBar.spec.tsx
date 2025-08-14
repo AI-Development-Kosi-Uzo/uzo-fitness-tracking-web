@@ -1,9 +1,9 @@
-import { describe, it, expect, vi, beforeAll } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { TabBar } from './TabBar'
 
 vi.mock('@tanstack/react-router', () => ({
-	Link: (props: any) => <a href={props.to}>{props.children}</a>,
+	Link: (props: { to: string; children: React.ReactNode }) => <a href={props.to}>{props.children}</a>,
 }))
 
 describe('TabBar', () => {
