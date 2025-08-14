@@ -1,38 +1,12 @@
 import { useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { queryKeys } from '../../data/queryKeys'
-import type { WorkoutSession } from '../../data/types'
 import { MemoryWorkoutSessionsRepository } from '../../data/repositories/memory/workoutSessions.repo'
 import { Calendar } from '../../components/history/Calendar'
 import { SessionList } from '../../components/history/SessionList'
+import { computeStreak, groupSessionsByDate } from './utils'
 
 const workoutSessionsRepo = new MemoryWorkoutSessionsRepository()
-
-export function groupSessionsByDate(sessions: WorkoutSession[]): Record<string, WorkoutSession[]> {
-  return sessions.reduce<Record<string, WorkoutSession[]>>((acc, s) => {
-    const key = s.date
-    if (!acc[key]) acc[key] = []
-    acc[key].push(s)
-    return acc
-  }, {})
-}
-
-export function computeStreak(dates: string[]): number {
-  if (dates.length === 0) return 0
-  const set = new Set(dates)
-  let streak = 0
-  const cursor = new Date()
-  while (true) {
-    const iso = cursor.toISOString().slice(0, 10)
-    if (set.has(iso)) {
-      streak += 1
-      cursor.setDate(cursor.getDate() - 1)
-    } else {
-      break
-    }
-  }
-  return streak
-}
 
 export const HistoryPage = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(new Date().toISOString().slice(0, 10))

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import type { WorkoutSession } from '../data/types'
-import { computeStreak, groupSessionsByDate } from './index'
+import { computeStreak, groupSessionsByDate } from './utils'
 
 function iso(d: Date) {
   return d.toISOString().slice(0, 10)
