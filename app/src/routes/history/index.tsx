@@ -24,7 +24,7 @@ export const HistoryPage = () => {
   const daySessions = selectedDate ? (sessionsByDate[selectedDate] ?? []) : []
 
   return (
-    <div className="p-4 flex flex-col gap-4">
+    <div className="p-4 pb-16 flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <div>
           <div className="text-2xl font-semibold">History</div>

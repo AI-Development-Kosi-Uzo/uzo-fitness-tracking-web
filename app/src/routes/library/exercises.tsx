@@ -12,8 +12,8 @@ export const LibraryExercisesPage = () => {
 	}, [])
 
 	return (
-		<div style={{ paddingBottom: 60 }}>
-			<h1 style={{ fontSize: 22, fontWeight: 800, marginBottom: 12 }}>Exercises</h1>
+		<div className="pb-16 p-4 space-y-3">
+			<h1 className="text-2xl font-semibold tracking-tight">Exercises</h1>
 			<ExercisePicker exercises={exercises} onSelect={() => {}} />
 		</div>
 	)

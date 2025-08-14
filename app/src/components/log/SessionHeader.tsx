@@ -3,12 +3,12 @@ import { RestTimerPicker } from './RestTimerPicker'
 
 export function SessionHeader({ title }: { title: string }) {
 	return (
-		<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
-			<h2>{title}</h2>
-			<div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+		<header className="flex items-center justify-between gap-3">
+			<h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+			<div className="flex items-center gap-2">
 				<RestTimerPicker />
 				<RestTimerButton />
 			</div>
-		</div>
+		</header>
 	)
 }

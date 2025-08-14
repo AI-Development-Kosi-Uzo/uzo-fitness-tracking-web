@@ -12,23 +12,23 @@ export const LibraryPage = () => {
 	}, [])
 
 	return (
-		<div style={{ paddingBottom: 60 }}>
-			<header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-				<h1 style={{ fontSize: 22, fontWeight: 800 }}>Library</h1>
-				<Link to="/library/exercises">Exercises</Link>
+		<div className="pb-16 p-4 space-y-3">
+			<header className="flex items-center justify-between">
+				<h1 className="text-2xl font-semibold tracking-tight">Library</h1>
+				<Link to="/library/exercises" className="text-sm text-blue-600">Exercises</Link>
 			</header>
 			<section>
-				<h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>Workout Templates</h2>
+				<h2 className="text-base font-semibold mb-2">Workout Templates</h2>
 				{templates.length === 0 ? (
-					<div style={{ color: '#999' }}>No templates yet</div>
+					<div className="text-sm text-gray-600">No templates yet</div>
 				) : (
-					<ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+					<ul className="space-y-2">
 						{templates.map((t) => (
-							<li key={t.id} style={{ marginBottom: 8 }}>
+							<li key={t.id}>
 								<Link to="/library/templates/$templateId" params={{ templateId: t.id } as const}>
-									<div style={{ border: '1px solid #eee', borderRadius: 8, padding: 12 }}>
-										<div style={{ fontWeight: 700 }}>{t.name}</div>
-										<div style={{ color: '#666' }}>{t.summary}</div>
+									<div className="rounded-2xl bg-white/80 dark:bg-gray-900/60 backdrop-blur-sm shadow-[0_1px_3px_rgba(0,0,0,0.08),0_10px_20px_-10px_rgba(0,0,0,0.25)] p-3">
+										<div className="font-semibold">{t.name}</div>
+										<div className="text-sm text-gray-600">{t.summary}</div>
 									</div>
 								</Link>
 							</li>

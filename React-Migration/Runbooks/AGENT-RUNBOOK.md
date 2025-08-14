@@ -56,6 +56,67 @@ npx tailwindcss init -p
 ```
 Update Tailwind config to read tokens; create `app/src/styles/tokens.css` and include the `cssVariables` snippet from tokens. Import it in `main.tsx` or global CSS.
 
+### 3b) Mobile-first iOS-style design system (minimalist)
+- Design goals: high clarity, minimal chrome, fast, thumb-friendly.
+- Layout
+  - Single column; center content; max width 480–560px on large screens.
+  - Respect safe areas with `env(safe-area-inset-*)`.
+  - Spacing, radii, colors, and typography come from design tokens only.
+  - Prefer `clamp()` for responsive type and spacing where needed.
+- Color & elevation
+  - Light: subtle neutrals for background; one primary accent; semantic states.
+  - Dark: same tokens; avoid pure black; respect contrast ratios.
+  - Elevation via soft shadows and optional translucency (backdrop-blur).
+- Typography
+  - System font stack tuned for iOS feel: `-apple-system, system-ui, Segoe UI, Roboto, Inter, sans-serif`.
+  - Use token-driven sizes and weights; avoid arbitrary font sizes.
+- Components
+  - Navigation bar (title centered, large title on scroll), Tab bar (5 max items), segmented control, lists/cards, sheets/modals with rounded corners.
+  - Buttons: primary/secondary/destructive; 44px min touch target; generous hit areas.
+  - Inputs: large labels/placeholders; clear affordances; inline validation.
+- Motion & feedback
+  - Durations 150–250ms; standard ease tokens; respect `prefers-reduced-motion`.
+  - Toast/banners for sync/offline; skeletons for loading.
+- States
+  - Pressed opacity/scale 0.98; focus rings visible for keyboard; disabled lowered contrast.
+- Iconography
+  - Use a consistent set (e.g., Phosphor, Heroicons) with `currentColor`.
+- Implementation snippets
+```css
+/* Safe areas */
+html, body { height: 100%; }
+body { padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+
+/**** Tokens usage: pull values from app/src/styles/tokens.css ****/
+:root { /* tokens are generated; example usage only */ }
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+```
+```tsx
+// Page container (max width + gradient background + safe areas handled globally)
+export const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="mx-auto max-w-[560px] min-h-dvh bg-gradient-to-b from-white to-slate-50 dark:from-gray-950 dark:to-gray-900">
+    {children}
+  </div>
+)
+```
+```tsx
+// Card (minimal elevation + rounded corners)
+export const Card: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="rounded-2xl bg-white/80 dark:bg-gray-900/60 backdrop-blur-sm shadow-[0_1px_3px_rgba(0,0,0,0.08),0_10px_20px_-10px_rgba(0,0,0,0.25)]">
+    {children}
+  </div>
+)
+```
+```ts
+// Interaction constants
+export const motion = { fast: 150, base: 200, slow: 250 }
+export const easing = { standard: 'cubic-bezier(0.2, 0, 0, 1)', empha: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+```
+
 ### 4) Establish project layout
 Replicate structure from [../05-React-Architecture.md](../05-React-Architecture.md).
 ```text
@@ -162,10 +223,45 @@ Follow [../07-PWA-Spec.md](../07-PWA-Spec.md):
 If enabling cloud sync, provision schema per [../10-API-Contracts.md](../10-API-Contracts.md), set env vars, and add network repositories mirroring local repos.
 
 ### 11) Testing
-Use [../13-Testing-Plan.md](../13-Testing-Plan.md):
+Adopt a strict TDD loop: write a failing test, implement minimally, refactor, and keep all tests green before proceeding.
 - Unit: utils (totals, streaks), Zustand stores
 - Integration: forms (RHF+Zod), repos (fake IndexedDB)
 - E2E: core flows (create → activate → log → finish → history/trends), photos (upload/compare/edit), offline → online queue flush
+
+Commands (example; adjust if different in your `app/package.json`):
+```bash
+# Unit/integration tests (watch)
+npm --prefix app run test:watch
+
+# Unit/integration tests (CI)
+npm --prefix app run test
+
+# E2E: run dev server + playwright
+npm --prefix app run dev &
+SERVER_PID=$!
+trap "kill $SERVER_PID" EXIT
+npm --prefix app run e2e
+```
+
+E2E device profile (mobile-first):
+```ts
+// app/playwright.config.ts (excerpt)
+import { defineConfig, devices } from '@playwright/test'
+export default defineConfig({
+  projects: [
+    { name: 'webkit-iphone', use: { ...devices['iPhone 12'] } },
+    { name: 'chromium-mobile', use: { ...devices['Pixel 7'] } },
+  ],
+})
+```
+
+Guidelines
+- Keep tests colocated next to code; name with `.spec.ts(x)`
+- Use `@testing-library/react` and avoid implementation details
+- For Zustand, assert state transitions and timers deterministically (jest fake timers or vitest timers)
+- For repos, use fake IndexedDB and seed realistic fixtures
+- For E2E, emulate iPhone dimensions and touch; verify accessibility roles and labels
+- Gate merges on green unit + e2e suites
 
 ### 12) CI and deploy
 Apply [../14-Build-&-Deploy.md](../14-Build-&-Deploy.md):
@@ -178,11 +274,12 @@ Audit with [../11-Accessibility-Checklist.md](../11-Accessibility-Checklist.md) 
 ### 14) Execution loop (do this until complete)
 Use the ordered plan in [../16-Tasks.md](../16-Tasks.md). For each task:
 1. Open linked spec(s) from this runbook
-2. Implement files exactly at the indicated paths
-3. Run unit tests; add missing tests per [13]
-4. Run e2e critical path
-5. Commit and push (if allowed by workflow)
-6. Update `React-Migration/16-Tasks.md`: check the completed item(s) under your agent in “Remaining Tasks by Parallel Workstream” and optionally append `(PR #<number>)`
+2. Write/adjust tests first (unit/integration/E2E as applicable)
+3. Implement files exactly at the indicated paths to satisfy tests
+4. Run unit tests and ensure green; iterate until passing
+5. Run E2E critical path on mobile viewport (iPhone 12/13 dimensions)
+6. Commit and push (if allowed by workflow)
+7. Update `React-Migration/16-Tasks.md`: check the completed item(s) under your agent in “Remaining Tasks by Parallel Workstream” and optionally append `(PR #<number>)`
 
 Milestones (suggested):
 - M1: Scaffold + routes + tokens + Dexie schema
