@@ -11,6 +11,7 @@
     "test": "vitest run || true",
     "test:ui": "vitest",
     "test:e2e:smoke": "playwright test tests/e2e/smoke.spec.ts",
+    "test:e2e:settings": "playwright test tests/e2e/settings.smoke.spec.ts",
     "e2e:install": "npx playwright install --with-deps"
   },
   "dependencies": {

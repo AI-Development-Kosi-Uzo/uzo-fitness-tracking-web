@@ -6,6 +6,9 @@ import {
   createRouter,
   redirect,
 } from '@tanstack/react-router'
+import SettingsPage from './routes/settings'
+import ProgressStatsPage from './routes/progress/stats'
+import ProgressPhotosPage from './routes/progress/photos'
 
 // Root layout shell
 export function RootLayout() {
@@ -24,9 +27,7 @@ export const LibraryTemplatePage = () => <div>Library Template</div>
 export const LibraryExercisesPage = () => <div>Library Exercises</div>
 export const HistoryPage = () => <div>History</div>
 export const ProgressLayout = () => <Outlet />
-import ProgressStatsPage from './routes/progress/stats'
-import ProgressPhotosPage from './routes/progress/photos'
-export const SettingsPage = () => <div>Settings</div>
+// Settings route component is loaded from routes/settings
 
 // Route tree
 const rootRoute = createRootRoute({ component: RootLayout })
