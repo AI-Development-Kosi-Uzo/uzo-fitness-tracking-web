@@ -98,7 +98,7 @@ Rules
   - [ ] Build `Calendar`, `SessionList` in `app/src/components/history/*`
 
 - Agent G — Progress Feature
-  - [ ] Build `Chart` components, `PhotoGrid`, `CompareView`, `EditPhotoModal` in `app/src/components/progress/*`
+- [x] Build `Chart` components, `PhotoGrid`, `CompareView`, `EditPhotoModal` in `app/src/components/progress/*`
 
 - Agent P — PWA & Sync
   - [ ] Implement `app/src/data/outbox.ts` and integrate with SW for background sync
