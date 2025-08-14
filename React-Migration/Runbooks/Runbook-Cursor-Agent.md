@@ -61,4 +61,24 @@ Quick links
 - Tasks: [../16-Tasks.md](../16-Tasks.md)
 - Architecture: [../05-React-Architecture.md](../05-React-Architecture.md)
 
+#### Ownership quick map
+- Data: Agent B (`app/src/data/**/*`)
+- Routes/Shell: Agent C (`app/src/routes/**/*`, `app/src/main.tsx`)
+- Logging: Agent D; Library: Agent E; History: Agent F; Progress: Agent G; Settings: Agent H
+- Shared UI: Agent E/A (`app/src/components/shared/**/*`, `app/src/styles/**/*`)
+
+#### Parallelization rules
+- Only edit within your ownership areas
+- Do not import data implementations into routes/components; use exposed interfaces/hooks
+- Rebase from `main` daily; resolve conflicts locally before PR
+- Keep PRs small and scoped; include tests for changed code
+
+#### Branch naming
+- `feat/<area>-<task>` (e.g., `feat/progress-photos-grid`)
+
+#### PR checklist (must pass)
+- [ ] Typecheck, lint, unit, e2e smoke green
+- [ ] No forbidden imports or cross-feature coupling
+- [ ] Contracts unchanged (or ADR linked if changed by Agent B)
+
 

@@ -68,4 +68,16 @@ app/
 
 See: [06-Data-Layer-Spec.md](./06-Data-Layer-Spec.md), [07-PWA-Spec.md](./07-PWA-Spec.md)
 
+#### Ownership Boundaries (for Parallel Work)
+- Data layer (`app/src/data/**/*`) is owned by Agent B
+- Routes and app shell (`app/src/routes/**/*`, `app/src/main.tsx`) are owned by Agent C and relevant feature agents
+- Feature UI components live under `app/src/components/<feature>/**/*` and are owned by that feature agent
+- Shared UI primitives live under `app/src/components/shared/**/*` and can be edited by Agent A/E only
+- Styles and tokens (`app/src/styles/**/*`) owned by Agent A/E
+
+#### Import Rules
+- `routes/*` may import from `components/*` and `data/*` only
+- No cross-feature imports between `components/<feature>` directories
+- `data` implementations (Dexie/Supabase) must not be imported from `routes` directly; expose hooks/helpers via repository interfaces
+
 

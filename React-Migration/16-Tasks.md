@@ -59,4 +59,25 @@
 References
 - See docs in this folder, esp. `05-React-Architecture.md`, `06-Data-Layer-Spec.md`, `07-PWA-Spec.md`.
 
+### Parallel Workstreams & Agent Ownership
+
+- Agent A — Foundation & CI (owns: root configs, `app/index.html`, build/test configs)
+- Agent B — Data Layer & Contracts (owns: `app/src/data/**/*`, `01-Domain-Models.yml` alignment)
+- Agent C — Routing & Shell (owns: `app/src/routes/root.tsx`, providers in `app/src/main.tsx`)
+- Agent D — Logging Feature (owns: `app/src/routes/log/**/*`, `app/src/components/log/**/*`)
+- Agent E — Library Feature (owns: `app/src/routes/library/**/*`, `app/src/components/library/**/*`)
+- Agent F — History Feature (owns: `app/src/routes/history/**/*`, `app/src/components/history/**/*`)
+- Agent G — Progress Feature (owns: `app/src/routes/progress/**/*`, `app/src/components/progress/**/*`)
+- Agent H — Settings Feature (owns: `app/src/routes/settings/**/*`)
+- Agent P — PWA & Sync (owns: `app/sw/**/*`, Workbox/Vite PWA config)
+- Agent T — Testing & QA (owns: test infra, Playwright/Vitest suites)
+
+Rules
+- Do not modify areas owned by another agent.
+- UI/Routes may only import data via repository interfaces; no direct Dexie/Supabase from routes/components.
+- Contract/interface changes must be proposed by Agent B with a small ADR and a short freeze window announcement.
+- Short-lived branches: `feat/<area>-<task>`; rebase daily onto `main` to reduce conflicts.
+
+---
+
 

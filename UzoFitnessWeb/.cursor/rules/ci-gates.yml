@@ -1,0 +1,13 @@
+checks:
+  - name: typecheck
+    command: pnpm typecheck
+  - name: lint
+    command: pnpm lint
+  - name: unit
+    command: pnpm test -- --run
+  - name: e2e-smoke
+    command: pnpm e2e:smoke
+  - name: build
+    command: pnpm build
+  - name: bundle-size
+    command: pnpm -s bundle:check || exit 0
