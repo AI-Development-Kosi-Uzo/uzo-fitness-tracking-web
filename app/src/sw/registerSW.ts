@@ -1,3 +1,7 @@
+type ServiceWorkerRegistrationWithSync = ServiceWorkerRegistration & {
+  sync?: { register: (tag: string) => Promise<void> }
+}
+
 export function registerSW() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -6,8 +10,8 @@ export function registerSW() {
         .register(swUrl)
         .then(async (registration) => {
           try {
-            const anyReg = registration as any
-            await anyReg.sync?.register('uzofitness-sync')
+            const reg = registration as ServiceWorkerRegistrationWithSync
+            await reg.sync?.register('uzofitness-sync')
           } catch {
             // background sync not supported; ignore
           }
