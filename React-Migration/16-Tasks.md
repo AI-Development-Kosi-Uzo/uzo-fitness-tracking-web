@@ -6,10 +6,11 @@
   - [ ] Files: `app/index.html`, `app/src/main.tsx`, `app/src/styles/tokens.css`, `tailwind.config.js`, `postcss.config.js`, `vite.config.ts`
 
 - [ ] [DATA] Implement Dexie schema and repositories
-  - [ ] Define types from `01-Domain-Models.yml`
-  - [ ] Create tables and indexes; write CRUD repos
-  - [ ] Seed sample data for dev
+  - [x] Define types from `01-Domain-Models.yml`
+  - [x] Create tables and indexes; write CRUD repos (in-memory repos implemented; Dexie tables defined)
+  - [x] Seed sample data for dev (in-memory repos seeded for exercises/sessions/sets)
   - [ ] Files: `app/src/data/types.ts`, `app/src/data/db.ts`, `app/src/data/repositories/*.ts`, `app/src/data/seed.ts`
+  - [x] Wire repository instances for app use: `app/src/data/repositories/instances.ts`
 
 - [ ] [STATE] Create Zustand stores
   - [ ] Timers store (workout/rest) with visibility pause
@@ -18,7 +19,9 @@
 
 - [ ] [ROUTES] Implement routes and layouts
   - [ ] Root + bottom nav
-  - [ ] `/log` + SessionModal
+  - [x] `/log` basic page: start/resume today session; shows active plan
+  - [ ] SessionModal (rest timers/supersets) for `/log`
+  - [x] `/log/session` minimal logger UI: list session exercises; add/toggle sets; finish gating
   - [ ] `/library` + template editor + exercises
   - [ ] `/history`
   - [x] `/progress/stats` + `/progress/photos`
