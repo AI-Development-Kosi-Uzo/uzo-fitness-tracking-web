@@ -3,9 +3,12 @@ import { createRoot } from 'react-dom/client'
 import './styles/tokens.css'
 import './index.css'
 import { AppRouter } from './router'
+import { registerSW } from './sw/registerSW'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AppRouter />
   </StrictMode>,
 )
+
+registerSW()

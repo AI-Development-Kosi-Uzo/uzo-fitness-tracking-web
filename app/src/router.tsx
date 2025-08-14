@@ -1,32 +1,21 @@
 import {
-  Outlet,
   RouterProvider,
   createRootRoute,
   createRoute,
   createRouter,
   redirect,
 } from '@tanstack/react-router'
-
-// Root layout shell
-export function RootLayout() {
-  return (
-    <div>
-      <Outlet />
-    </div>
-  )
-}
-
-// Pages (lightweight stubs)
-export const LogPage = () => <div>Log</div>
-export const LogSessionPage = () => <div>Log Session</div>
-export const LibraryPage = () => <div>Library</div>
-export const LibraryTemplatePage = () => <div>Library Template</div>
-export const LibraryExercisesPage = () => <div>Library Exercises</div>
-export const HistoryPage = () => <div>History</div>
-export const ProgressLayout = () => <Outlet />
-export const ProgressStatsPage = () => <div>Progress Stats</div>
-export const ProgressPhotosPage = () => <div>Progress Photos</div>
-export const SettingsPage = () => <div>Settings</div>
+import { RootLayout } from './routes/root'
+import { LogPage } from './routes/log'
+import { LogSessionPage } from './routes/log/session'
+import { LibraryPage } from './routes/library'
+import { LibraryTemplatePage } from './routes/library/template.$id'
+import { LibraryExercisesPage } from './routes/library/exercises'
+import { HistoryPage } from './routes/history'
+import { ProgressLayout } from './routes/progress/stats'
+import { ProgressStatsPage } from './routes/progress/stats'
+import { ProgressPhotosPage } from './routes/progress/photos'
+import { SettingsPage } from './routes/settings'
 
 // Route tree
 const rootRoute = createRootRoute({ component: RootLayout })
