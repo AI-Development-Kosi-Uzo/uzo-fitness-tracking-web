@@ -8,6 +8,16 @@ import { registerSW } from './sw/registerSW'
 
 const queryClient = new QueryClient()
 
+function ensureManifest() {
+	const existing = document.querySelector('link[rel="manifest"]')
+	if (!existing) {
+		const link = document.createElement('link')
+		link.rel = 'manifest'
+		link.href = '/manifest.webmanifest'
+		document.head.appendChild(link)
+	}
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
@@ -16,4 +26,5 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 
+ensureManifest()
 registerSW()

@@ -1,3 +1,5 @@
+/// <reference lib="webworker" />
+
 self.addEventListener('install', () => {
   // @ts-expect-error service worker global skipWaiting not in TS lib
   self.skipWaiting()
