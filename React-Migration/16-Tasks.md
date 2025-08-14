@@ -2,16 +2,16 @@
 
 - [ ] [ARCH] Initialize project scaffold (Vite + React 18 + TS + SWC + Tailwind)
   - [x] Create `app/` with `src/` structure, tokens CSS, Tailwind config
-  - [ ] Add Zustand, React Query, RHF, Zod, Recharts, Workbox
+  - [x] Add Zustand, React Query, RHF, Zod, Recharts, Workbox
   - [x] Add TanStack Router, Dexie
   - [x] Files: `app/index.html`, `app/src/main.tsx`, `app/src/styles/tokens.css`, `tailwind.config.js`, `postcss.config.js`, `vite.config.ts`
 
 - [ ] [DATA] Implement Dexie schema and repositories
   - [x] Define types from `01-Domain-Models.yml`
   - [x] Create tables and indexes; write CRUD repos (memory repos in place)
-  - [ ] Seed sample data for dev
+  - [x] Seed sample data for dev
   - [x] Files: `app/src/data/types.ts`, `app/src/data/db.ts`, `app/src/data/repositories/*.ts`
-  - [ ] Files: `app/src/data/seed.ts`
+  - [x] Files: `app/src/data/seed.ts`
 
 - [ ] [STATE] Create Zustand stores
   - [x] Timers store (workout/rest) with visibility pause (stub)

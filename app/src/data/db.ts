@@ -39,6 +39,12 @@ export class UzoDb extends Dexie {
       performedExercises: 'id,exerciseId,workoutSessionId,performedAt',
       progressPhotos: 'id,date,angle',
     })
+
+    // Populate hook will seed initial dev data
+    this.on('populate', async () => {
+      const { seedDevData } = await import('./seed')
+      await seedDevData()
+    })
   }
 }
 
