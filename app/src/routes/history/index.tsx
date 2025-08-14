@@ -8,7 +8,7 @@ import { SessionList } from '../../components/history/SessionList'
 
 const workoutSessionsRepo = new MemoryWorkoutSessionsRepository()
 
-function groupSessionsByDate(sessions: WorkoutSession[]): Record<string, WorkoutSession[]> {
+export function groupSessionsByDate(sessions: WorkoutSession[]): Record<string, WorkoutSession[]> {
   return sessions.reduce<Record<string, WorkoutSession[]>>((acc, s) => {
     const key = s.date
     if (!acc[key]) acc[key] = []
@@ -17,7 +17,7 @@ function groupSessionsByDate(sessions: WorkoutSession[]): Record<string, Workout
   }, {})
 }
 
-function computeStreak(dates: string[]): number {
+export function computeStreak(dates: string[]): number {
   if (dates.length === 0) return 0
   const set = new Set(dates)
   let streak = 0
