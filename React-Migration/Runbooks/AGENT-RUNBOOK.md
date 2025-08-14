@@ -146,7 +146,7 @@ export const useTimers = create<TimersState>(() => ({ workoutSeconds:0, restByEx
 Create empty pages and wire routes matching [../02-Feature-Map.md](../02-Feature-Map.md): `/log`, `/log/session`, `/library`, `/library/templates/:templateId`, `/library/exercises`, `/history`, `/progress/stats`, `/progress/photos`, `/settings`.
 
 ### 8) Components
-Use [03-UI-Inventory.csv](./03-UI-Inventory.csv) and per-screen specs in [09-Component-Specs](./09-Component-Specs/README.md) to implement:
+Use [03-UI-Inventory.csv](../03-UI-Inventory.csv) and per-screen specs in [09-Component-Specs](../09-Component-Specs/README.md) to implement:
 - Log: ExerciseRow, SetRow, RestTimerButton, RestTimerPicker, SessionHeader
 - Library: TemplateEditor, DayList, ExerciseTemplateRow, ExercisePicker
 - History: Calendar, SessionList
