@@ -1,4 +1,4 @@
-import {
+import { 
   Outlet,
   RouterProvider,
   createRootRoute,
@@ -6,6 +6,7 @@ import {
   createRouter,
   redirect,
 } from '@tanstack/react-router'
+import HistoryRoute from './routes/history/index'
 
 // Root layout shell
 export function RootLayout() {
@@ -22,7 +23,7 @@ export const LogSessionPage = () => <div>Log Session</div>
 export const LibraryPage = () => <div>Library</div>
 export const LibraryTemplatePage = () => <div>Library Template</div>
 export const LibraryExercisesPage = () => <div>Library Exercises</div>
-export const HistoryPage = () => <div>History</div>
+export const HistoryPage = HistoryRoute
 export const ProgressLayout = () => <Outlet />
 import ProgressStatsPage from './routes/progress/stats'
 import ProgressPhotosPage from './routes/progress/photos'
