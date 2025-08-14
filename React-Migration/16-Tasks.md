@@ -14,19 +14,19 @@
   - [ ] Files: `app/src/data/seed.ts`
 
 - [ ] [STATE] Create Zustand stores
-  - [ ] Timers store (workout/rest) with visibility pause
-  - [ ] UI store for modals and segmented states
-  - [ ] Files: `app/src/state/timers.store.ts`, `app/src/state/ui.store.ts`
+  - [x] Timers store (workout/rest) with visibility pause (stub)
+  - [x] UI store for modals and segmented states (stub)
+  - [x] Files: `app/src/state/timers.store.ts`, `app/src/state/ui.store.ts`
 
 - [ ] [ROUTES] Implement routes and layouts
   - [x] Base router and redirect to `/log`
-  - [ ] Root + bottom nav
-  - [ ] `/log` + SessionModal
-  - [ ] `/library` + template editor + exercises
-  - [ ] `/history`
-  - [ ] `/progress/stats` + `/progress/photos`
-  - [ ] `/settings`
-  - [ ] Files: `app/src/routes/root.tsx`, `app/src/routes/log/index.tsx`, `app/src/routes/log/session.tsx`, `app/src/routes/library/index.tsx`, `app/src/routes/library/template.$id.tsx`, `app/src/routes/library/exercises.tsx`, `app/src/routes/history/index.tsx`, `app/src/routes/progress/stats.tsx`, `app/src/routes/progress/photos.tsx`, `app/src/routes/settings/index.tsx`
+  - [x] Root + bottom nav
+  - [x] `/log` + SessionModal (stub page + session page)
+  - [x] `/library` + template editor + exercises (stub pages)
+  - [x] `/history` (stub page)
+  - [x] `/progress/stats` + `/progress/photos` (stub pages)
+  - [x] `/settings` (stub page)
+  - [x] Files: `app/src/routes/root.tsx`, `app/src/routes/log/index.tsx`, `app/src/routes/log/session.tsx`, `app/src/routes/library/index.tsx`, `app/src/routes/library/template.$id.tsx`, `app/src/routes/library/exercises.tsx`, `app/src/routes/history/index.tsx`, `app/src/routes/progress/stats.tsx`, `app/src/routes/progress/photos.tsx`, `app/src/routes/settings/index.tsx`
 
 - [ ] [UI] Build components
   - [ ] ExerciseRow, SetRow, RestTimerButton, RestTimerPicker, SessionHeader
@@ -39,8 +39,9 @@
   - [ ] Files: `app/src/components/progress/{Chart.tsx,PhotoGrid.tsx,CompareView.tsx,EditPhotoModal.tsx}`
 
 - [ ] [SYNC] PWA SW and background sync
-  - [ ] Workbox config; mutation outbox + sync
-  - [ ] Files: `workbox.config.ts`, `app/src/sw/sw.ts`, `app/src/data/outbox.ts`
+  - [x] Workbox config (stub only)
+  - [x] Files: `workbox.config.ts`, `app/src/sw/sw.ts`
+  - [ ] Files: `app/src/data/outbox.ts` (pending)
 
 - [ ] [SYNC-SUPABASE] Local Supabase setup and adapters
   - [ ] Initialize CLI project, start local stack: `supabase init`, `supabase start`
@@ -55,9 +56,9 @@
   - [x] Files: `app/src/tests/e2e/smoke.spec.ts`
 
 - [ ] [DEPLOY] CI/CD
-  - [ ] GitHub Actions build/test
+  - [x] GitHub Actions build/test
   - [ ] Vercel deployment
-  - [ ] Files: `.github/workflows/ci.yml`, `vercel.json`
+  - [x] Files: `.github/workflows/ci.yml`, `vercel.json`
 
 References
 - See docs in this folder, esp. `05-React-Architecture.md`, `06-Data-Layer-Spec.md`, `07-PWA-Spec.md`.
