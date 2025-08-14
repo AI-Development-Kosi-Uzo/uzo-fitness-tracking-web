@@ -1,65 +1,73 @@
 # UzoFitness React PWA - Complete Remaining Tasks List
 
 **Generated:** January 2025  
-**Total Tasks:** 127 tasks across 8 major categories  
-**Estimated Effort:** 6-8 weeks with focused development
+**Total Tasks:** 132 tasks across 10 major categories  
+**Estimated Effort:** 6-8 weeks with focused development  
+**Development Approach:** Test-Driven Development (TDD) throughout all phases
 
 ---
 
 ## 📱 PHASE 1: MOBILE-FIRST DESIGN & BASIC FUNCTIONALITY (Weeks 1-2)
 
+### 1.0 TDD Infrastructure Setup
+- [ ] **Task 1.0.1**: Set up comprehensive testing framework (Vitest + Testing Library)
+- [ ] **Task 1.0.2**: Configure test coverage reporting and thresholds
+- [ ] **Task 1.0.3**: Create test utilities and custom render functions
+- [ ] **Task 1.0.4**: Set up visual regression testing for mobile components
+- [ ] **Task 1.0.5**: Create test data factories for all domain models
+
 ### 1.1 Mobile Design System Setup
-- [ ] **Task 1.1.1**: Create mobile-first CSS variables for spacing, typography, and breakpoints
-- [ ] **Task 1.1.2**: Implement responsive breakpoint system (xs: 320px, sm: 640px, md: 768px, lg: 1024px)
-- [ ] **Task 1.1.3**: Create mobile-first layout utilities and grid system
-- [ ] **Task 1.1.4**: Implement touch-friendly sizing guidelines (min 44px touch targets)
-- [ ] **Task 1.1.5**: Set up mobile typography scale and hierarchy
+- [ ] **Task 1.1.1**: Write tests for mobile-first CSS variables and responsive behavior
+- [ ] **Task 1.1.2**: Create responsive breakpoint system with visual regression tests
+- [ ] **Task 1.1.3**: Build mobile-first layout utilities with component tests
+- [ ] **Task 1.1.4**: Implement touch-friendly sizing guidelines with interaction tests
+- [ ] **Task 1.1.5**: Set up mobile typography scale with visual consistency tests
 
 ### 1.2 Navigation & Layout Overhaul
-- [ ] **Task 1.2.1**: Redesign bottom navigation with proper mobile styling
-- [ ] **Task 1.2.2**: Add active state indicators for navigation items
-- [ ] **Task 1.2.3**: Implement proper mobile header with back buttons where needed
-- [ ] **Task 1.2.4**: Create mobile-optimized page layouts with proper padding/margins
-- [ ] **Task 1.2.5**: Add safe area handling for notched devices
+- [ ] **Task 1.2.1**: Write tests for bottom navigation behavior and styling
+- [ ] **Task 1.2.2**: Test active state indicators and navigation state management
+- [ ] **Task 1.2.3**: Implement mobile header with back button interaction tests
+- [ ] **Task 1.2.4**: Create mobile-optimized layouts with responsive behavior tests
+- [ ] **Task 1.2.5**: Add safe area handling with device simulation tests
 
 ### 1.3 Core Component Styling
-- [ ] **Task 1.3.1**: Style all form inputs for mobile (buttons, inputs, selects)
-- [ ] **Task 1.3.2**: Create mobile-optimized card components
-- [ ] **Task 1.3.3**: Implement proper spacing system using design tokens
-- [ ] **Task 1.3.4**: Add mobile-friendly list and table styles
-- [ ] **Task 1.3.5**: Create mobile-optimized modal and overlay components
+- [ ] **Task 1.3.1**: Write tests for mobile form input behavior and accessibility
+- [ ] **Task 1.3.2**: Create mobile-optimized card components with interaction tests
+- [ ] **Task 1.3.3**: Implement spacing system with visual regression tests
+- [ ] **Task 1.3.4**: Add mobile-friendly list/table styles with responsive tests
+- [ ] **Task 1.3.5**: Create modal/overlay components with focus management tests
 
 ---
 
 ## 🏋️ PHASE 2: WORKOUT LOGGING FUNCTIONALITY (Weeks 2-3)
 
 ### 2.1 Exercise Logging Components
-- [ ] **Task 2.1.1**: Implement ExerciseRow component with set tracking
-- [ ] **Task 2.1.2**: Create SetRow component for individual set logging
-- [ ] **Task 2.1.3**: Build RestTimerButton with visual countdown
-- [ ] **Task 2.1.4**: Implement RestTimerPicker for setting rest durations
-- [ ] **Task 2.1.5**: Create SessionHeader component showing current workout info
+- [ ] **Task 2.1.1**: Write tests for ExerciseRow component behavior and set tracking
+- [ ] **Task 2.1.2**: Create SetRow component with form validation tests
+- [ ] **Task 2.1.3**: Build RestTimerButton with timer functionality tests
+- [ ] **Task 2.1.4**: Implement RestTimerPicker with duration selection tests
+- [ ] **Task 2.1.5**: Create SessionHeader component with workout info display tests
 
 ### 2.2 Workout Session Management
-- [ ] **Task 2.2.1**: Build active workout session state management
-- [ ] **Task 2.2.2**: Implement session start/pause/resume functionality
-- [ ] **Task 2.2.3**: Create session completion workflow
-- [ ] **Task 2.2.4**: Add session notes and duration tracking
-- [ ] **Task 2.2.5**: Implement session exercise reordering
+- [ ] **Task 2.2.1**: Write tests for workout session state management and transitions
+- [ ] **Task 2.2.2**: Test session start/pause/resume functionality with timer integration
+- [ ] **Task 2.2.3**: Create session completion workflow with validation tests
+- [ ] **Task 2.2.4**: Add session notes and duration tracking with persistence tests
+- [ ] **Task 2.2.5**: Implement session exercise reordering with drag-and-drop tests
 
 ### 2.3 Set Logging & Validation
-- [ ] **Task 2.3.1**: Create set input forms (reps, weight, RPE)
-- [ ] **Task 2.3.2**: Implement form validation for set data
-- [ ] **Task 2.3.3**: Add previous set data display and comparison
-- [ ] **Task 2.3.4**: Create superset and drop set support
-- [ ] **Task 2.3.5**: Implement set completion tracking
+- [ ] **Task 2.3.1**: Write tests for set input forms with validation rules
+- [ ] **Task 2.3.2**: Test form validation for set data with error handling
+- [ ] **Task 2.3.3**: Add previous set data display with comparison logic tests
+- [ ] **Task 2.3.4**: Create superset and drop set support with relationship tests
+- [ ] **Task 2.3.5**: Implement set completion tracking with state persistence tests
 
 ### 2.4 Timer System UI
-- [ ] **Task 2.4.1**: Create visual rest timer display
-- [ ] **Task 2.4.2**: Implement workout timer with start/pause
-- [ ] **Task 2.4.3**: Add timer notifications and alerts
-- [ ] **Task 2.4.4**: Create timer settings and customization
-- [ ] **Task 2.4.5**: Implement background timer functionality
+- [ ] **Task 2.4.1**: Write tests for visual rest timer display and countdown
+- [ ] **Task 2.4.2**: Test workout timer with start/pause and state management
+- [ ] **Task 2.4.3**: Add timer notifications and alerts with notification API tests
+- [ ] **Task 2.4.4**: Create timer settings with persistence and validation tests
+- [ ] **Task 2.4.5**: Implement background timer functionality with service worker tests
 
 ---
 
@@ -222,26 +230,26 @@
 
 ## 🧪 PHASE 9: TESTING & QUALITY ASSURANCE (Ongoing)
 
-### 9.1 Unit & Integration Testing
-- [ ] **Task 9.1.1**: Complete component unit tests
-- [ ] **Task 9.1.2**: Add repository and service tests
-- [ ] **Task 9.1.3**: Implement state management tests
-- [ ] **Task 9.1.4**: Create utility and helper function tests
-- [ ] **Task 9.1.5**: Add API contract and integration tests
+### 9.1 TDD Infrastructure & Test Coverage
+- [ ] **Task 9.1.1**: Set up comprehensive test coverage reporting (aim for 90%+)
+- [ ] **Task 9.1.2**: Create test utilities and custom render functions for components
+- [ ] **Task 9.1.3**: Implement test data factories and fixtures for all domain models
+- [ ] **Task 9.1.4**: Set up integration test database with proper cleanup
+- [ ] **Task 9.1.5**: Create performance testing suite for mobile devices
 
-### 9.2 E2E Testing
-- [ ] **Task 9.2.1**: Test core workout logging workflow
-- [ ] **Task 9.2.2**: Verify template creation and management
-- [ ] **Task 9.2.3**: Test progress tracking and photo management
-- [ ] **Task 9.2.4**: Validate offline functionality
-- [ ] **Task 9.2.5**: Test cross-device synchronization
+### 9.2 E2E Testing & User Workflows
+- [ ] **Task 9.2.1**: Test core workout logging workflow end-to-end
+- [ ] **Task 9.2.2**: Verify template creation and management workflows
+- [ ] **Task 9.2.3**: Test progress tracking and photo management flows
+- [ ] **Task 9.2.4**: Validate offline functionality and sync recovery
+- [ ] **Task 9.2.5**: Test cross-device synchronization and data consistency
 
-### 9.3 Performance & Accessibility
-- [ ] **Task 9.3.1**: Implement performance monitoring
-- [ ] **Task 9.3.2**: Add accessibility testing and compliance
-- [ ] **Task 9.3.3**: Test mobile performance on various devices
-- [ ] **Task 9.3.4**: Validate PWA performance metrics
-- [ ] **Task 9.3.5**: Implement error tracking and monitoring
+### 9.3 Quality & Performance Testing
+- [ ] **Task 9.3.1**: Implement performance monitoring and metrics collection
+- [ ] **Task 9.3.2**: Add accessibility testing and WCAG compliance validation
+- [ ] **Task 9.3.3**: Test mobile performance on various device profiles
+- [ ] **Task 9.3.4**: Validate PWA performance metrics and Core Web Vitals
+- [ ] **Task 9.3.5**: Implement error tracking, monitoring, and alerting
 
 ---
 
@@ -266,6 +274,7 @@
 ## 📊 TASK PRIORITY MATRIX
 
 ### 🔴 HIGH PRIORITY (Must Complete)
+- TDD infrastructure and testing setup
 - Mobile-first design system
 - Core workout logging functionality
 - Basic mobile UI components
@@ -300,13 +309,30 @@
 
 ---
 
+## 🧪 TDD DEVELOPMENT APPROACH
+
+### TDD Workflow for Each Task:
+1. **Write Test First**: Create failing test that describes the desired behavior
+2. **Implement Minimally**: Write the minimum code to make the test pass
+3. **Refactor**: Clean up the code while keeping tests green
+4. **Repeat**: Move to the next feature with the same cycle
+
+### Testing Strategy by Component Type:
+- **UI Components**: Component behavior tests + visual regression tests
+- **Business Logic**: Unit tests for utilities + integration tests for workflows
+- **State Management**: State transition tests + side effect tests
+- **Data Layer**: Repository contract tests + data persistence tests
+- **User Interactions**: User event tests + accessibility tests
+
 ## 💡 DEVELOPMENT TIPS
 
-1. **Start with Mobile**: Build mobile-first, then enhance for larger screens
-2. **Focus on Core Workflows**: Implement end-to-end workout logging first
-3. **Iterative Development**: Build MVP features, then add polish
-4. **User Testing**: Test on actual mobile devices early and often
-5. **Performance First**: Optimize for mobile performance from the start
+1. **Test First**: Always write tests before implementing features
+2. **Start with Mobile**: Build mobile-first, then enhance for larger screens
+3. **Focus on Core Workflows**: Implement end-to-end workout logging first
+4. **Iterative Development**: Build MVP features, then add polish
+5. **User Testing**: Test on actual mobile devices early and often
+6. **Performance First**: Optimize for mobile performance from the start
+7. **Test Coverage**: Maintain 90%+ test coverage throughout development
 
 ---
 
