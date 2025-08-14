@@ -1,3 +1,11 @@
+import { TemplateEditor } from '../../components/library/TemplateEditor'
+import { useParams } from '@tanstack/react-router'
+
 export const LibraryTemplatePage = () => {
-  return <div>Library Template</div>
+	const { templateId } = useParams({ from: '/library/templates/$templateId' })
+	return (
+		<div style={{ paddingBottom: 60 }}>
+			<TemplateEditor templateId={templateId} />
+		</div>
+	)
 }
