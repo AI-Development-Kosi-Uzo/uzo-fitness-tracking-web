@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(new URL(import.meta.url)))
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react({ jsxImportSource: 'react', plugins: [] })],
   resolve: {
     alias: {
       '@data': resolve(__dirname, 'src/data'),
@@ -22,6 +22,19 @@ export default defineConfig({
     host: true,
     port: 5174,
     allowedHosts: ['host.docker.internal', 'localhost', '127.0.0.1', '192.168.86.33'],
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          router: ['@tanstack/react-router'],
+          query: ['@tanstack/react-query'],
+          charts: ['recharts'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 900,
   },
   // Vitest config lives under the "vitest" key when using Vite's config file
   // but TypeScript typing for defineConfig(UserConfig) may not include it.
