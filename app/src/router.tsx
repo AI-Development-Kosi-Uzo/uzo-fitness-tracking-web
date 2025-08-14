@@ -6,6 +6,9 @@ import {
   createRouter,
   redirect,
 } from '@tanstack/react-router'
+import LibraryIndexRoute from './routes/library/index'
+import LibraryTemplateRoute from './routes/library/template.$id'
+import LibraryExercisesRoute from './routes/library/exercises'
 
 // Root layout shell
 export function RootLayout() {
@@ -19,9 +22,9 @@ export function RootLayout() {
 // Pages (lightweight stubs)
 export const LogPage = () => <div>Log</div>
 export const LogSessionPage = () => <div>Log Session</div>
-export const LibraryPage = () => <div>Library</div>
-export const LibraryTemplatePage = () => <div>Library Template</div>
-export const LibraryExercisesPage = () => <div>Library Exercises</div>
+export const LibraryPage = () => <Outlet />
+export const LibraryTemplatePage = () => <LibraryTemplateRoute />
+export const LibraryExercisesPage = () => <LibraryExercisesRoute />
 export const HistoryPage = () => <div>History</div>
 export const ProgressLayout = () => <Outlet />
 import ProgressStatsPage from './routes/progress/stats'
@@ -54,6 +57,11 @@ const libraryRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'library',
   component: LibraryPage,
+})
+const libraryIndexRoute = createRoute({
+  getParentRoute: () => libraryRoute,
+  path: '/',
+  component: LibraryIndexRoute,
 })
 const libraryTemplateRoute = createRoute({
   getParentRoute: () => libraryRoute,
@@ -97,7 +105,7 @@ const settingsRoute = createRoute({
 const routeTree = rootRoute.addChildren([
   indexRedirectRoute,
   logRoute.addChildren([logSessionRoute]),
-  libraryRoute.addChildren([libraryTemplateRoute, libraryExercisesRoute]),
+  libraryRoute.addChildren([libraryIndexRoute, libraryTemplateRoute, libraryExercisesRoute]),
   historyRoute,
   progressRoute.addChildren([progressStatsRoute, progressPhotosRoute]),
   settingsRoute,

@@ -19,7 +19,7 @@
 - [ ] [ROUTES] Implement routes and layouts
   - [ ] Root + bottom nav
   - [ ] `/log` + SessionModal
-  - [ ] `/library` + template editor + exercises
+  - [x] `/library` + template editor + exercises
   - [ ] `/history`
   - [x] `/progress/stats` + `/progress/photos`
   - [ ] `/settings`
@@ -27,7 +27,7 @@
 
 - [ ] [UI] Build components
   - [ ] ExerciseRow, SetRow, RestTimerButton, RestTimerPicker, SessionHeader
-  - [ ] TemplateEditor, DayList, ExerciseTemplateRow, ExercisePicker
+  - [x] TemplateEditor, DayList, ExerciseTemplateRow, ExercisePicker
   - [ ] Calendar, SessionList
   - [x] Chart components, PhotoGrid, CompareView, EditPhotoModal
   - [ ] Files: `app/src/components/log/{ExerciseRow.tsx,SetRow.tsx,RestTimerButton.tsx,RestTimerPicker.tsx,SessionHeader.tsx}`
