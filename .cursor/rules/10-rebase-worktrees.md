@@ -8,15 +8,26 @@ git fetch origin --prune --tags
 # Main worktree
 git worktree add worktrees/main main
 
-# Core and feature worktrees
-git worktree add worktrees/core migration/core || true
-git worktree add worktrees/logging migration/logging || true
-git worktree add worktrees/library migration/library || true
-git worktree add worktrees/history migration/history || true
-git worktree add worktrees/progress migration/progress || true
-git worktree add worktrees/settings migration/settings || true
-git worktree add worktrees/pwa-infra migration/pwa-infra || true
-git worktree add worktrees/testing-ci migration/testing-ci || true
+# Core and feature worktrees (created as sibling directories outside the main repo)
+git worktree add -b migration/core "/Users/kosiuzodinma/Library/Mobile Documents/com~apple~CloudDocs/Documents-Kosi-Mac-mini/AI-Built-Applications/UzoFitnessWeb-core" main || true
+git worktree add -b migration/logging "/Users/kosiuzodinma/Library/Mobile Documents/com~apple~CloudDocs/Documents-Kosi-Mac-mini/AI-Built-Applications/UzoFitnessWeb-logging" main || true
+git worktree add -b migration/library "/Users/kosiuzodinma/Library/Mobile Documents/com~apple~CloudDocs/Documents-Kosi-Mac-mini/AI-Built-Applications/UzoFitnessWeb-library" main || true
+git worktree add -b migration/history "/Users/kosiuzodinma/Library/Mobile Documents/com~apple~CloudDocs/Documents-Kosi-Mac-mini/AI-Built-Applications/UzoFitnessWeb-history" main || true
+git worktree add -b migration/progress "/Users/kosiuzodinma/Library/Mobile Documents/com~apple~CloudDocs/Documents-Kosi-Mac-mini/AI-Built-Applications/UzoFitnessWeb-progress" main || true
+git worktree add -b migration/settings "/Users/kosiuzodinma/Library/Mobile Documents/com~apple~CloudDocs/Documents-Kosi-Mac-mini/AI-Built-Applications/UzoFitnessWeb-settings" main || true
+git worktree add -b migration/pwa-infra "/Users/kosiuzodinma/Library/Mobile Documents/com~apple~CloudDocs/Documents-Kosi-Mac-mini/AI-Built-Applications/UzoFitnessWeb-pwa-infra" main || true
+git worktree add -b migration/testing-ci "/Users/kosiuzodinma/Library/Mobile Documents/com~apple~CloudDocs/Documents-Kosi-Mac-mini/AI-Built-Applications/UzoFitnessWeb-testing-ci" main || true
+```
+
+Open all epic worktrees in Cursor (helper)
+```bash
+# Opens each sibling worktree in a new Cursor window
+for w in core logging library history progress settings pwa-infra testing-ci; do
+  cursor -n "/Users/kosiuzodinma/Library/Mobile Documents/com~apple~CloudDocs/Documents-Kosi-Mac-mini/AI-Built-Applications/UzoFitnessWeb-$w"
+done
+
+# Optional: also open the main repo
+cursor -n "/Users/kosiuzodinma/Library/Mobile Documents/com~apple~CloudDocs/Documents-Kosi-Mac-mini/AI-Built-Applications/UzoFitnessWeb"
 ```
 
 Before opening a PR (pre-rebase and squash-cleanup)
