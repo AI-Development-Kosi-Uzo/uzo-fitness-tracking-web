@@ -40,7 +40,7 @@ const DAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 export function Calendar({ datesWithSessions, selectedDate, onSelectDate }: CalendarProps) {
   const todayIso = toIsoDate(new Date())
-  const monthAnchor = selectedDate ? new Date(selectedDate) : new Date()
+  const monthAnchor = useMemo(() => (selectedDate ? new Date(selectedDate) : new Date()), [selectedDate])
 
   const setOfSessionDates = useMemo(() => new Set(datesWithSessions), [datesWithSessions])
 

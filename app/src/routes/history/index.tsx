@@ -21,7 +21,7 @@ function computeStreak(dates: string[]): number {
   if (dates.length === 0) return 0
   const set = new Set(dates)
   let streak = 0
-  let cursor = new Date()
+  const cursor = new Date()
   while (true) {
     const iso = cursor.toISOString().slice(0, 10)
     if (set.has(iso)) {
