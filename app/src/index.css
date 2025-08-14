@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root { color-scheme: light dark; }
+
+html, body { height: 100%; }
+
+body {
+	font-family: -apple-system, system-ui, Segoe UI, Roboto, Inter, ui-sans-serif, sans-serif;
+	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+	background: var(--color-bg);
+	color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
